@@ -6,13 +6,12 @@
     <title>SignalWire - Мессенджер</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ========== СТИЛИ (ТЕ ЖЕ САМЫЕ) ========== */
+        /* ========== БАЗОВЫЕ СТИЛИ ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.2s ease;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
         }
         
         body {
@@ -23,7 +22,7 @@
             overflow: hidden;
         }
         
-        /* ========== ОКНО РЕГИСТРАЦИИ ========== */
+        /* ОКНО РЕГИСТРАЦИИ */
         .auth-modal {
             position: fixed;
             top: 0;
@@ -43,7 +42,6 @@
             border-radius: 10px;
             border: 1px solid #333;
             width: 400px;
-            box-shadow: 0 0 30px rgba(0,136,204,0.1);
         }
         
         .auth-title {
@@ -72,24 +70,14 @@
             color: #aaa;
         }
         
-        .auth-input-group {
-            margin-bottom: 20px;
-        }
-        
-        .auth-label {
-            display: block;
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        
         .auth-input {
             width: 100%;
             padding: 14px;
+            margin: 10px 0;
             background: #222;
             border: 1px solid #333;
-            border-radius: 8px;
-            color: white;
+            border-radius: 5px;
+            color: #fff;
             font-size: 15px;
         }
         
@@ -99,12 +87,11 @@
         }
         
         .username-check {
-            margin-top: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
             font-size: 13px;
             color: #888;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            min-height: 20px;
         }
         
         .auth-button {
@@ -112,7 +99,7 @@
             padding: 14px;
             background: #0088cc;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             color: white;
             font-size: 16px;
             font-weight: bold;
@@ -124,9 +111,9 @@
             background: #0077b3;
         }
         
-        /* ========== ОСНОВНОЙ ИНТЕРФЕЙС ========== */
+        /* БОКОВАЯ ПАНЕЛЬ */
         .sidebar {
-            width: 350px;
+            width: 320px;
             background: #111;
             border-right: 1px solid #333;
             display: none;
@@ -142,29 +129,23 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #0088cc;
             font-size: 20px;
             font-weight: bold;
-            color: #0088cc;
             margin-bottom: 20px;
         }
         
-        .user-card-mini {
+        .user-card {
             background: #222;
             padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 15px;
         }
         
-        .user-info-mini {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .user-avatar-small {
+        .user-avatar {
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -174,12 +155,12 @@
             font-size: 20px;
         }
         
-        .user-details-small h4 {
+        .user-info h4 {
             font-size: 16px;
             margin-bottom: 4px;
         }
         
-        .user-details-small p {
+        .user-info p {
             font-size: 12px;
             color: #0088cc;
         }
@@ -192,9 +173,6 @@
             border: none;
             color: #fff;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .search-box {
@@ -209,7 +187,6 @@
             border: 1px solid #333;
             border-radius: 20px;
             color: #fff;
-            font-size: 14px;
         }
         
         .search-box i {
@@ -223,12 +200,6 @@
             flex: 1;
             overflow-y: auto;
             padding: 10px 0;
-        }
-        
-        .section-title {
-            padding: 10px 20px;
-            color: #777;
-            font-size: 12px;
         }
         
         .contact {
@@ -285,9 +256,6 @@
         .contact-info h4 {
             font-size: 15px;
             margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
         .contact-username {
@@ -296,14 +264,10 @@
             background: rgba(0,136,204,0.1);
             padding: 2px 8px;
             border-radius: 10px;
+            margin-left: 5px;
         }
         
-        .contact-bio {
-            font-size: 12px;
-            color: #aaa;
-        }
-        
-        /* ========== ЧАТ ========== */
+        /* ЧАТ */
         .chat-container {
             flex: 1;
             display: none;
@@ -335,16 +299,6 @@
             justify-content: center;
             font-size: 20px;
             position: relative;
-        }
-        
-        .chat-user-info h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        
-        .chat-user-username {
-            font-size: 13px;
-            color: #0088cc;
         }
         
         .messages {
@@ -391,7 +345,6 @@
             background: #111;
             border-top: 1px solid #333;
             display: flex;
-            align-items: center;
             gap: 15px;
         }
         
@@ -433,93 +386,6 @@
             margin-bottom: 20px;
         }
         
-        .chat-placeholder h2 {
-            color: #555;
-            margin-bottom: 10px;
-        }
-        
-        /* ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ========== */
-        .settings-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-        
-        .settings-box {
-            background: #111;
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            width: 450px;
-        }
-        
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .settings-header h2 {
-            color: #0088cc;
-        }
-        
-        .close-btn {
-            background: #222;
-            border: 1px solid #333;
-            color: #fff;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .settings-group {
-            margin-bottom: 20px;
-        }
-        
-        .settings-label {
-            display: block;
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-        
-        .settings-input, .settings-textarea {
-            width: 100%;
-            padding: 12px;
-            background: #222;
-            border: 1px solid #333;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 14px;
-        }
-        
-        .settings-textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
-        .settings-save-btn {
-            width: 100%;
-            padding: 12px;
-            background: #0088cc;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        
         .notification {
             position: fixed;
             bottom: 20px;
@@ -549,7 +415,7 @@
     </style>
 </head>
 <body>
-    <!-- ========== ОКНО РЕГИСТРАЦИИ ========== -->
+    <!-- ОКНО РЕГИСТРАЦИИ -->
     <div class="auth-modal" id="authModal">
         <div class="auth-box">
             <div class="auth-title">
@@ -561,23 +427,10 @@
                 <i class="fas fa-bolt"></i> SignalWire — НОВАЯ ЭРА МЕССЕНДЖЕРОВ <i class="fas fa-rocket"></i>
             </div>
             
-            <div class="auth-input-group">
-                <label class="auth-label">Ваше имя</label>
-                <input type="text" class="auth-input" id="regName" placeholder="Иван Иванов" maxlength="30">
-            </div>
-            
-            <div class="auth-input-group">
-                <label class="auth-label">Юзернейм (уникальный)</label>
-                <input type="text" class="auth-input" id="regUsername" placeholder="ivanov" maxlength="20">
-                <div class="username-check" id="usernameCheck">
-                    Введите юзернейм (минимум 3 символа)
-                </div>
-            </div>
-            
-            <div class="auth-input-group">
-                <label class="auth-label">О себе</label>
-                <input type="text" class="auth-input" id="regBio" placeholder="Дизайнер, разработчик..." maxlength="100">
-            </div>
+            <input type="text" class="auth-input" id="regName" placeholder="Ваше имя" maxlength="30">
+            <input type="text" class="auth-input" id="regUsername" placeholder="Юзернейм (например: ivanov)" maxlength="20">
+            <div class="username-check" id="usernameCheck">Введите юзернейм</div>
+            <input type="text" class="auth-input" id="regBio" placeholder="О себе (необязательно)" maxlength="100">
             
             <button class="auth-button" id="registerBtn">
                 <i class="fas fa-rocket"></i> НАЧАТЬ ОБЩЕНИЕ
@@ -585,38 +438,7 @@
         </div>
     </div>
     
-    <!-- ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ========== -->
-    <div class="settings-modal" id="settingsModal">
-        <div class="settings-box">
-            <div class="settings-header">
-                <h2><i class="fas fa-cog"></i> Настройки</h2>
-                <button class="close-btn" id="closeSettingsBtn">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="settings-group">
-                <label class="settings-label">Имя</label>
-                <input type="text" class="settings-input" id="settingsName" maxlength="30">
-            </div>
-            
-            <div class="settings-group">
-                <label class="settings-label">Юзернейм</label>
-                <input type="text" class="settings-input" id="settingsUsername" maxlength="20">
-            </div>
-            
-            <div class="settings-group">
-                <label class="settings-label">О себе</label>
-                <textarea class="settings-textarea" id="settingsBio" maxlength="100"></textarea>
-            </div>
-            
-            <button class="settings-save-btn" id="saveSettingsBtn">
-                <i class="fas fa-save"></i> Сохранить
-            </button>
-        </div>
-    </div>
-    
-    <!-- ========== БОКОВАЯ ПАНЕЛЬ ========== -->
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
     <div class="sidebar" id="sidebar">
         <div class="header">
             <div class="logo">
@@ -624,7 +446,7 @@
                 <span>SignalWire</span>
             </div>
             
-            <div class="user-card-mini" id="userCardMini"></div>
+            <div class="user-card" id="userCard"></div>
             
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -632,14 +454,10 @@
             </div>
         </div>
         
-        <div style="padding: 10px 20px 0;">
-            <div class="section-title">📱 ПОЛЬЗОВАТЕЛИ</div>
-        </div>
-        
         <div class="contacts" id="contactsList"></div>
     </div>
     
-    <!-- ========== ЧАТ ========== -->
+    <!-- ЧАТ -->
     <div class="chat-container" id="chatContainer">
         <div class="chat-placeholder" id="chatPlaceholder">
             <i class="fas fa-comments"></i>
@@ -674,7 +492,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // ========== 🔥 ТВОИ КЛЮЧИ FIREBASE ==========
+        // ========== ТВОИ КЛЮЧИ FIREBASE ==========
         const firebaseConfig = {
             apiKey: "AIzaSyB7sFm26dXetYBdj42h3UO5EDym39nxEns",
             authDomain: "signalwire-b52e8.firebaseapp.com",
@@ -682,13 +500,18 @@
             projectId: "signalwire-b52e8",
             storageBucket: "signalwire-b52e8.firebasestorage.app",
             messagingSenderId: "897606109522",
-            appId: "1:897606109522:web:42ba031b9411e08b41928b",
-            measurementId: "G-WNS2DSQM62"
+            appId: "1:897606109522:web:42ba031b9411e08b41928b"
         };
 
-        // Инициализация Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        // Инициализация Firebase с проверкой
+        let database;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            console.log('✅ Firebase подключен!');
+        } catch (e) {
+            console.error('❌ Ошибка Firebase:', e);
+        }
         
         // ========== ПЕРЕМЕННЫЕ ==========
         let currentUser = null;
@@ -697,7 +520,7 @@
         let onlineUsers = {};
         let usernameCheckTimeout;
         
-        // ========== СКРЫВАЕМ ИНТЕРФЕЙС ПРИ ЗАГРУЗКЕ ==========
+        // ========== СКРЫВАЕМ ИНТЕРФЕЙС ==========
         document.getElementById('sidebar').style.display = 'none';
         document.getElementById('chatContainer').style.display = 'none';
         
@@ -725,6 +548,12 @@
             checkDiv.style.color = '#888';
             
             usernameCheckTimeout = setTimeout(() => {
+                if (!database) {
+                    checkDiv.innerHTML = '❌ Ошибка подключения к БД';
+                    checkDiv.style.color = '#ff4444';
+                    return;
+                }
+                
                 database.ref('usernames/' + username).once('value')
                     .then(snapshot => {
                         if (snapshot.exists()) {
@@ -747,6 +576,11 @@
         document.getElementById('registerBtn').addEventListener('click', register);
         
         function register() {
+            if (!database) {
+                showNotification('❌ Ошибка подключения к базе данных! Проверь правила Firebase');
+                return;
+            }
+            
             const name = document.getElementById('regName').value.trim();
             const username = document.getElementById('regUsername').value.trim().toLowerCase();
             const bio = document.getElementById('regBio').value.trim() || 'Пользователь SignalWire';
@@ -775,7 +609,7 @@
                     }
                     
                     // Создаем пользователя
-                    const userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+                    const userId = 'user_' + Date.now();
                     
                     currentUser = {
                         id: userId,
@@ -797,15 +631,12 @@
                     return database.ref().update(updates);
                 })
                 .then(() => {
-                    // Сохраняем в localStorage
                     localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
                     
-                    // Показываем интерфейс
                     document.getElementById('authModal').style.display = 'none';
                     document.getElementById('sidebar').style.display = 'flex';
                     document.getElementById('chatContainer').style.display = 'flex';
                     
-                    // Обновляем UI
                     updateUserCard();
                     loadUsers();
                     setupFirebaseListeners();
@@ -814,117 +645,45 @@
                 })
                 .catch(error => {
                     console.error(error);
-                    showNotification('❌ Ошибка регистрации');
+                    showNotification('❌ Ошибка регистрации. Проверь правила Firebase!');
                 });
         }
         
         function getRandomAvatar() {
-            const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓', '👨‍🚀', '👩‍🚀'];
+            const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓'];
             return avatars[Math.floor(Math.random() * avatars.length)];
         }
         
         function getRandomColor() {
-            const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#4a6fa5', '#588157'];
+            const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#4a6fa5'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
         
         // ========== КАРТОЧКА ПОЛЬЗОВАТЕЛЯ ==========
         function updateUserCard() {
-            const card = document.getElementById('userCardMini');
+            const card = document.getElementById('userCard');
             if (!currentUser) return;
             
             card.innerHTML = `
-                <div class="user-info-mini">
-                    <div class="user-avatar-small" style="background: ${currentUser.color}">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="user-avatar" style="background: ${currentUser.color}">
                         ${currentUser.avatar}
                     </div>
-                    <div class="user-details-small">
+                    <div class="user-info">
                         <h4>${currentUser.name}</h4>
                         <p>@${currentUser.username}</p>
                     </div>
                 </div>
-                <button class="settings-btn" id="openSettingsBtn">
+                <button class="settings-btn" onclick="alert('Настройки в разработке')">
                     <i class="fas fa-cog"></i>
                 </button>
             `;
-            
-            setTimeout(() => {
-                document.getElementById('openSettingsBtn')?.addEventListener('click', openSettings);
-            }, 100);
         }
-        
-        // ========== НАСТРОЙКИ ==========
-        function openSettings() {
-            document.getElementById('settingsName').value = currentUser.name;
-            document.getElementById('settingsUsername').value = currentUser.username;
-            document.getElementById('settingsBio').value = currentUser.bio || '';
-            document.getElementById('settingsModal').style.display = 'flex';
-        }
-        
-        document.getElementById('closeSettingsBtn').addEventListener('click', function() {
-            document.getElementById('settingsModal').style.display = 'none';
-        });
-        
-        document.getElementById('saveSettingsBtn').addEventListener('click', function() {
-            const newName = document.getElementById('settingsName').value.trim();
-            const newUsername = document.getElementById('settingsUsername').value.trim().toLowerCase();
-            const newBio = document.getElementById('settingsBio').value.trim() || 'Пользователь SignalWire';
-            
-            if (!newName || !newUsername) {
-                showNotification('❌ Заполните все поля!');
-                return;
-            }
-            
-            if (newUsername.length < 3) {
-                showNotification('❌ Юзернейм минимум 3 символа');
-                return;
-            }
-            
-            const updates = {};
-            const oldUsername = currentUser.username;
-            
-            if (newUsername !== oldUsername) {
-                database.ref('usernames/' + newUsername).once('value')
-                    .then(snapshot => {
-                        if (snapshot.exists() && snapshot.val() !== currentUser.id) {
-                            showNotification('❌ Юзернейм занят!');
-                            return;
-                        }
-                        
-                        updates['usernames/' + oldUsername] = null;
-                        updates['usernames/' + newUsername] = currentUser.id;
-                        
-                        currentUser.name = newName;
-                        currentUser.username = newUsername;
-                        currentUser.bio = newBio;
-                        
-                        updates['users/' + currentUser.id] = currentUser;
-                        
-                        return database.ref().update(updates);
-                    })
-                    .then(() => {
-                        localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
-                        updateUserCard();
-                        document.getElementById('settingsModal').style.display = 'none';
-                        loadUsers();
-                        showNotification('✅ Профиль обновлен!');
-                    });
-            } else {
-                currentUser.name = newName;
-                currentUser.bio = newBio;
-                
-                database.ref('users/' + currentUser.id).set(currentUser)
-                    .then(() => {
-                        localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
-                        updateUserCard();
-                        document.getElementById('settingsModal').style.display = 'none';
-                        showNotification('✅ Профиль обновлен!');
-                    });
-            }
-        });
         
         // ========== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ==========
         function loadUsers() {
+            if (!database) return;
+            
             database.ref('users').on('value', snapshot => {
                 allUsers = snapshot.val() || {};
                 
@@ -940,8 +699,7 @@
             if (!contactsList || !currentUser) return;
             
             contactsList.innerHTML = '';
-            
-            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             
             const users = Object.entries(allUsers)
                 .filter(([id]) => id !== currentUser.id)
@@ -968,7 +726,6 @@
                             ${user.name}
                             <span class="contact-username">@${user.username}</span>
                         </h4>
-                        <div class="contact-bio">${user.bio || 'Пользователь SignalWire'}</div>
                     </div>
                 `;
                 
@@ -978,9 +735,7 @@
         }
         
         // ========== ПОИСК ==========
-        document.getElementById('searchInput').addEventListener('input', function() {
-            renderUsersList();
-        });
+        document.getElementById('searchInput').addEventListener('input', renderUsersList);
         
         // ========== ЧАТ ==========
         function startChat(userId, user) {
@@ -992,9 +747,9 @@
                     ${user.avatar || '👤'}
                     <div class="${isOnline ? 'online-badge' : 'offline-badge'}"></div>
                 </div>
-                <div class="chat-user-info">
+                <div>
                     <h3>${user.name}</h3>
-                    <span class="chat-user-username">@${user.username}</span>
+                    <span style="color: #0088cc;">@${user.username}</span>
                 </div>
             `;
             
@@ -1011,31 +766,27 @@
         
         function loadMessages(userId) {
             const messagesContainer = document.getElementById('messagesContainer');
-            messagesContainer.innerHTML = '';
-            
             const chatId = [currentUser.id, userId].sort().join('_');
             
             database.ref('chats/' + chatId).limitToLast(50).on('value', snapshot => {
                 const messages = snapshot.val() || {};
                 messagesContainer.innerHTML = '';
                 
-                Object.values(messages)
-                    .sort((a, b) => a.timestamp - b.timestamp)
-                    .forEach(msg => {
-                        const message = document.createElement('div');
-                        message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
-                        
-                        const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
-                            hour: '2-digit', minute: '2-digit'
-                        });
-                        
-                        message.innerHTML = `
-                            <div class="message-text">${msg.text}</div>
-                            <div class="message-time">${time}</div>
-                        `;
-                        
-                        messagesContainer.appendChild(message);
+                Object.values(messages).sort((a, b) => a.timestamp - b.timestamp).forEach(msg => {
+                    const message = document.createElement('div');
+                    message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
+                    
+                    const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
+                        hour: '2-digit', minute: '2-digit'
                     });
+                    
+                    message.innerHTML = `
+                        <div class="message-text">${msg.text}</div>
+                        <div class="message-time">${time}</div>
+                    `;
+                    
+                    messagesContainer.appendChild(message);
+                });
                 
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             });
@@ -1074,13 +825,14 @@
         
         // ========== FIREBASE СЛУШАТЕЛИ ==========
         function setupFirebaseListeners() {
+            if (!database || !currentUser) return;
+            
             database.ref('online/' + currentUser.id).set(true);
             database.ref('online/' + currentUser.id).onDisconnect().set(false);
             
             setInterval(() => {
                 if (currentUser) {
                     database.ref('online/' + currentUser.id).set(true);
-                    database.ref('users/' + currentUser.id + '/lastSeen').set(Date.now());
                 }
             }, 30000);
         }
@@ -1096,7 +848,7 @@
         // ========== ВОССТАНОВЛЕНИЕ СЕССИИ ==========
         window.addEventListener('load', function() {
             const savedUser = localStorage.getItem('signalwire_user');
-            if (savedUser) {
+            if (savedUser && database) {
                 try {
                     currentUser = JSON.parse(savedUser);
                     database.ref('users/' + currentUser.id).once('value')
@@ -1109,29 +861,11 @@
                                 updateUserCard();
                                 loadUsers();
                                 setupFirebaseListeners();
-                            } else {
-                                localStorage.removeItem('signalwire_user');
                             }
                         });
                 } catch (e) {
-                    console.error(e);
                     localStorage.removeItem('signalwire_user');
                 }
-            }
-        });
-        
-        // ========== ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ ВНЕ ==========
-        window.addEventListener('click', function(e) {
-            const settingsModal = document.getElementById('settingsModal');
-            if (e.target === settingsModal) {
-                settingsModal.style.display = 'none';
-            }
-        });
-        
-        // ========== ВЫХОД ПРИ ЗАКРЫТИИ ==========
-        window.addEventListener('beforeunload', function() {
-            if (currentUser) {
-                database.ref('online/' + currentUser.id).set(false);
             }
         });
     </script>
