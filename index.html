@@ -6,12 +6,12 @@
     <title>SignalWire - Мессенджер</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ========== БАЗОВЫЕ СТИЛИ ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
         }
         
         body {
@@ -22,7 +22,7 @@
             overflow: hidden;
         }
         
-        /* ОКНО РЕГИСТРАЦИИ */
+        /* ========== ОКНО ВХОДА/РЕГИСТРАЦИИ ========== */
         .auth-modal {
             position: fixed;
             top: 0;
@@ -58,6 +58,33 @@
         .auth-title h2 {
             font-size: 28px;
             color: #0088cc;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .auth-tab.active {
+            color: #0088cc;
+            border-bottom: 2px solid #0088cc;
+        }
+        
+        .auth-form {
+            display: block;
+        }
+        
+        .auth-form.hidden {
+            display: none;
         }
         
         .slogan {
@@ -111,9 +138,9 @@
             background: #0077b3;
         }
         
-        /* БОКОВАЯ ПАНЕЛЬ */
+        /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
         .sidebar {
-            width: 320px;
+            width: 350px;
             background: #111;
             border-right: 1px solid #333;
             display: none;
@@ -175,6 +202,11 @@
             cursor: pointer;
         }
         
+        .settings-btn:hover {
+            background: #0088cc;
+            transform: rotate(90deg);
+        }
+        
         .search-box {
             position: relative;
             margin-top: 10px;
@@ -200,6 +232,12 @@
             flex: 1;
             overflow-y: auto;
             padding: 10px 0;
+        }
+        
+        .section-title {
+            padding: 10px 20px;
+            color: #777;
+            font-size: 12px;
         }
         
         .contact {
@@ -267,7 +305,13 @@
             margin-left: 5px;
         }
         
-        /* ЧАТ */
+        .contact-bio {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+        
+        /* ========== ЧАТ ========== */
         .chat-container {
             flex: 1;
             display: none;
@@ -299,6 +343,33 @@
             justify-content: center;
             font-size: 20px;
             position: relative;
+        }
+        
+        .chat-user-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .chat-user-username {
+            font-size: 13px;
+            color: #0088cc;
+        }
+        
+        .chat-user-bio {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .chat-actions i {
+            font-size: 18px;
+            color: #aaa;
+            cursor: pointer;
         }
         
         .messages {
@@ -386,6 +457,141 @@
             margin-bottom: 20px;
         }
         
+        /* ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ========== */
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .settings-box {
+            background: #111;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            width: 450px;
+            max-width: 90%;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .settings-header h2 {
+            color: #0088cc;
+        }
+        
+        .close-btn {
+            background: #222;
+            border: 1px solid #333;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .settings-group {
+            margin-bottom: 20px;
+        }
+        
+        .settings-label {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .settings-input, .settings-textarea {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        .settings-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .avatar-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .avatar-option {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .avatar-option:hover {
+            border-color: #0088cc;
+        }
+        
+        .avatar-option.selected {
+            border-color: #0088cc;
+            background: #333;
+        }
+        
+        .color-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #fff;
+        }
+        
+        .settings-save-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0088cc;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
         .notification {
             position: fixed;
             bottom: 20px;
@@ -398,6 +604,20 @@
             display: none;
             z-index: 10001;
             max-width: 300px;
+        }
+        
+        .logout-btn {
+            padding: 8px 15px;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .logout-btn:hover {
+            background: #ff4444;
         }
         
         ::-webkit-scrollbar {
@@ -415,7 +635,7 @@
     </style>
 </head>
 <body>
-    <!-- ОКНО РЕГИСТРАЦИИ -->
+    <!-- ========== ОКНО ВХОДА/РЕГИСТРАЦИИ ========== -->
     <div class="auth-modal" id="authModal">
         <div class="auth-box">
             <div class="auth-title">
@@ -427,23 +647,94 @@
                 <i class="fas fa-bolt"></i> SignalWire — НОВАЯ ЭРА МЕССЕНДЖЕРОВ <i class="fas fa-rocket"></i>
             </div>
             
-            <input type="text" class="auth-input" id="regName" placeholder="Ваше имя" maxlength="30">
-            <input type="text" class="auth-input" id="regUsername" placeholder="Юзернейм (например: ivanov)" maxlength="20">
-            <div class="username-check" id="usernameCheck">Введите юзернейм</div>
-            <input type="text" class="auth-input" id="regBio" placeholder="О себе (необязательно)" maxlength="100">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Вход</div>
+                <div class="auth-tab" id="registerTab">Регистрация</div>
+            </div>
             
-            <button class="auth-button" id="registerBtn">
-                <i class="fas fa-rocket"></i> НАЧАТЬ ОБЩЕНИЕ
+            <!-- Форма входа -->
+            <div class="auth-form" id="loginForm">
+                <input type="text" class="auth-input" id="loginUsername" placeholder="Юзернейм" maxlength="20">
+                <input type="password" class="auth-input" id="loginPassword" placeholder="Пароль" maxlength="50">
+                <button class="auth-button" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+            </div>
+            
+            <!-- Форма регистрации -->
+            <div class="auth-form hidden" id="registerForm">
+                <input type="text" class="auth-input" id="regName" placeholder="Ваше имя" maxlength="30">
+                <input type="text" class="auth-input" id="regUsername" placeholder="Юзернейм" maxlength="20">
+                <div class="username-check" id="usernameCheck">Введите юзернейм</div>
+                <input type="password" class="auth-input" id="regPassword" placeholder="Пароль" maxlength="50">
+                <input type="password" class="auth-input" id="regPasswordConfirm" placeholder="Повторите пароль" maxlength="50">
+                <input type="text" class="auth-input" id="regBio" placeholder="О себе (необязательно)" maxlength="100">
+                <button class="auth-button" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ========== -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-box">
+            <div class="settings-header">
+                <h2><i class="fas fa-cog"></i> Настройки профиля</h2>
+                <button class="close-btn" id="closeSettingsBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Аватар</label>
+                <div class="avatar-selector" id="avatarSelector"></div>
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Цвет профиля</label>
+                <div class="color-selector" id="colorSelector"></div>
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Имя</label>
+                <input type="text" class="settings-input" id="settingsName" maxlength="30">
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Юзернейм</label>
+                <input type="text" class="settings-input" id="settingsUsername" maxlength="20">
+                <div style="font-size: 12px; color: #777; margin-top: 5px;">
+                    <i class="fas fa-info-circle"></i> После смены юзернейма старый освобождается
+                </div>
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">О себе</label>
+                <textarea class="settings-textarea" id="settingsBio" maxlength="100"></textarea>
+            </div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Новый пароль (если хотите сменить)</label>
+                <input type="password" class="settings-input" id="settingsNewPassword" placeholder="Оставьте пустым, если не меняете" maxlength="50">
+                <input type="password" class="settings-input" id="settingsNewPasswordConfirm" placeholder="Подтвердите новый пароль" maxlength="50">
+            </div>
+            
+            <button class="settings-save-btn" id="saveSettingsBtn">
+                <i class="fas fa-save"></i> Сохранить изменения
             </button>
         </div>
     </div>
     
-    <!-- БОКОВАЯ ПАНЕЛЬ -->
+    <!-- ========== БОКОВАЯ ПАНЕЛЬ ========== -->
     <div class="sidebar" id="sidebar">
         <div class="header">
             <div class="logo">
                 <i class="fas fa-paper-plane"></i>
                 <span>SignalWire</span>
+                <button class="logout-btn" id="logoutBtn" title="Выйти">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
             
             <div class="user-card" id="userCard"></div>
@@ -454,10 +745,14 @@
             </div>
         </div>
         
+        <div style="padding: 10px 20px 0;">
+            <div class="section-title">📱 ПОЛЬЗОВАТЕЛИ</div>
+        </div>
+        
         <div class="contacts" id="contactsList"></div>
     </div>
     
-    <!-- ЧАТ -->
+    <!-- ========== ЧАТ ========== -->
     <div class="chat-container" id="chatContainer">
         <div class="chat-placeholder" id="chatPlaceholder">
             <i class="fas fa-comments"></i>
@@ -492,7 +787,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // ========== ТВОИ КЛЮЧИ FIREBASE ==========
+        // ========== 🔥 ТВОИ КЛЮЧИ FIREBASE ==========
         const firebaseConfig = {
             apiKey: "AIzaSyB7sFm26dXetYBdj42h3UO5EDym39nxEns",
             authDomain: "signalwire-b52e8.firebaseapp.com",
@@ -503,15 +798,9 @@
             appId: "1:897606109522:web:42ba031b9411e08b41928b"
         };
 
-        // Инициализация Firebase с проверкой
-        let database;
-        try {
-            firebase.initializeApp(firebaseConfig);
-            database = firebase.database();
-            console.log('✅ Firebase подключен!');
-        } catch (e) {
-            console.error('❌ Ошибка Firebase:', e);
-        }
+        // Инициализация Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
         
         // ========== ПЕРЕМЕННЫЕ ==========
         let currentUser = null;
@@ -520,11 +809,30 @@
         let onlineUsers = {};
         let usernameCheckTimeout;
         
-        // ========== СКРЫВАЕМ ИНТЕРФЕЙС ==========
+        // Аватары и цвета
+        const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓', '👨‍🚀', '👩‍🚀', '🦸', '🦸‍♀️', '🧙', '🧙‍♀️', '🐱', '🐶', '🦊', '🐼', '🐧'];
+        const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#795548', '#4a6fa5', '#588157', '#bc6c25', '#9c27b0', '#e91e63', '#ff9800', '#4caf50'];
+        
+        // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ВХОДОМ И РЕГИСТРАЦИЕЙ ==========
+        document.getElementById('loginTab').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('registerTab').classList.remove('active');
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        });
+        
+        document.getElementById('registerTab').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('loginTab').classList.remove('active');
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+        });
+        
+        // ========== СКРЫВАЕМ ИНТЕРФЕЙС ПРИ ЗАГРУЗКЕ ==========
         document.getElementById('sidebar').style.display = 'none';
         document.getElementById('chatContainer').style.display = 'none';
         
-        // ========== ПРОВЕРКА ЮЗЕРНЕЙМА ==========
+        // ========== ПРОВЕРКА ЮЗЕРНЕЙМА ПРИ РЕГИСТРАЦИИ ==========
         document.getElementById('regUsername').addEventListener('input', function() {
             clearTimeout(usernameCheckTimeout);
             const username = this.value.toLowerCase().replace(/[^a-z0-9_]/g, '');
@@ -548,12 +856,6 @@
             checkDiv.style.color = '#888';
             
             usernameCheckTimeout = setTimeout(() => {
-                if (!database) {
-                    checkDiv.innerHTML = '❌ Ошибка подключения к БД';
-                    checkDiv.style.color = '#ff4444';
-                    return;
-                }
-                
                 database.ref('usernames/' + username).once('value')
                     .then(snapshot => {
                         if (snapshot.exists()) {
@@ -576,13 +878,10 @@
         document.getElementById('registerBtn').addEventListener('click', register);
         
         function register() {
-            if (!database) {
-                showNotification('❌ Ошибка подключения к базе данных! Проверь правила Firebase');
-                return;
-            }
-            
             const name = document.getElementById('regName').value.trim();
             const username = document.getElementById('regUsername').value.trim().toLowerCase();
+            const password = document.getElementById('regPassword').value.trim();
+            const passwordConfirm = document.getElementById('regPasswordConfirm').value.trim();
             const bio = document.getElementById('regBio').value.trim() || 'Пользователь SignalWire';
             
             if (!name) {
@@ -597,6 +896,21 @@
             
             if (username.length < 3) {
                 showNotification('❌ Юзернейм минимум 3 символа');
+                return;
+            }
+            
+            if (!password) {
+                showNotification('❌ Введите пароль!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('❌ Пароль должен быть минимум 6 символов');
+                return;
+            }
+            
+            if (password !== passwordConfirm) {
+                showNotification('❌ Пароли не совпадают!');
                 return;
             }
             
@@ -615,11 +929,13 @@
                         id: userId,
                         name: name,
                         username: username,
+                        password: password,
                         bio: bio,
-                        avatar: getRandomAvatar(),
-                        color: getRandomColor(),
+                        avatar: avatars[Math.floor(Math.random() * avatars.length)],
+                        color: colors[Math.floor(Math.random() * colors.length)],
                         online: true,
-                        lastSeen: Date.now()
+                        lastSeen: Date.now(),
+                        registeredAt: Date.now()
                     };
                     
                     // Сохраняем в Firebase
@@ -645,19 +961,80 @@
                 })
                 .catch(error => {
                     console.error(error);
-                    showNotification('❌ Ошибка регистрации. Проверь правила Firebase!');
+                    showNotification('❌ Ошибка регистрации');
                 });
         }
         
-        function getRandomAvatar() {
-            const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓'];
-            return avatars[Math.floor(Math.random() * avatars.length)];
+        // ========== ВХОД В АККАУНТ ==========
+        document.getElementById('loginBtn').addEventListener('click', login);
+        
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value.trim();
+            
+            if (!username || !password) {
+                showNotification('❌ Введите юзернейм и пароль!');
+                return;
+            }
+            
+            // Получаем ID пользователя по юзернейму
+            database.ref('usernames/' + username).once('value')
+                .then(snapshot => {
+                    const userId = snapshot.val();
+                    
+                    if (!userId) {
+                        showNotification('❌ Пользователь не найден!');
+                        return;
+                    }
+                    
+                    // Получаем данные пользователя
+                    return database.ref('users/' + userId).once('value');
+                })
+                .then(snapshot => {
+                    if (!snapshot) return;
+                    
+                    const user = snapshot.val();
+                    
+                    if (user.password !== password) {
+                        showNotification('❌ Неверный пароль!');
+                        return;
+                    }
+                    
+                    currentUser = user;
+                    currentUser.online = true;
+                    
+                    // Обновляем статус онлайн
+                    database.ref('online/' + currentUser.id).set(true);
+                    database.ref('users/' + currentUser.id + '/online').set(true);
+                    database.ref('users/' + currentUser.id + '/lastSeen').set(Date.now());
+                    
+                    localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
+                    
+                    document.getElementById('authModal').style.display = 'none';
+                    document.getElementById('sidebar').style.display = 'flex';
+                    document.getElementById('chatContainer').style.display = 'flex';
+                    
+                    updateUserCard();
+                    loadUsers();
+                    setupFirebaseListeners();
+                    
+                    showNotification('👋 С возвращением, ' + currentUser.name + '!');
+                })
+                .catch(error => {
+                    console.error(error);
+                    showNotification('❌ Ошибка входа');
+                });
         }
         
-        function getRandomColor() {
-            const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#4a6fa5'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
+        // ========== ВЫХОД ИЗ АККАУНТА ==========
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Вы действительно хотите выйти?')) {
+                database.ref('online/' + currentUser.id).set(false);
+                database.ref('users/' + currentUser.id + '/online').set(false);
+                localStorage.removeItem('signalwire_user');
+                location.reload();
+            }
+        });
         
         // ========== КАРТОЧКА ПОЛЬЗОВАТЕЛЯ ==========
         function updateUserCard() {
@@ -672,18 +1049,142 @@
                     <div class="user-info">
                         <h4>${currentUser.name}</h4>
                         <p>@${currentUser.username}</p>
+                        <div style="font-size: 11px; color: #aaa;">${currentUser.bio || ''}</div>
                     </div>
                 </div>
-                <button class="settings-btn" onclick="alert('Настройки в разработке')">
+                <button class="settings-btn" id="openSettingsBtn">
                     <i class="fas fa-cog"></i>
                 </button>
             `;
+            
+            setTimeout(() => {
+                document.getElementById('openSettingsBtn')?.addEventListener('click', openSettings);
+            }, 100);
         }
+        
+        // ========== НАСТРОЙКИ ПРОФИЛЯ ==========
+        function openSettings() {
+            // Заполняем текущими данными
+            document.getElementById('settingsName').value = currentUser.name;
+            document.getElementById('settingsUsername').value = currentUser.username;
+            document.getElementById('settingsBio').value = currentUser.bio || '';
+            document.getElementById('settingsNewPassword').value = '';
+            document.getElementById('settingsNewPasswordConfirm').value = '';
+            
+            // Заполняем аватары
+            const avatarSelector = document.getElementById('avatarSelector');
+            avatarSelector.innerHTML = '';
+            avatars.forEach(avatar => {
+                const div = document.createElement('div');
+                div.className = `avatar-option ${avatar === currentUser.avatar ? 'selected' : ''}`;
+                div.textContent = avatar;
+                div.onclick = function() {
+                    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                };
+                avatarSelector.appendChild(div);
+            });
+            
+            // Заполняем цвета
+            const colorSelector = document.getElementById('colorSelector');
+            colorSelector.innerHTML = '';
+            colors.forEach(color => {
+                const div = document.createElement('div');
+                div.className = `color-option ${color === currentUser.color ? 'selected' : ''}`;
+                div.style.background = color;
+                div.onclick = function() {
+                    document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                };
+                colorSelector.appendChild(div);
+            });
+            
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+        
+        document.getElementById('closeSettingsBtn').addEventListener('click', function() {
+            document.getElementById('settingsModal').style.display = 'none';
+        });
+        
+        document.getElementById('saveSettingsBtn').addEventListener('click', function() {
+            const newName = document.getElementById('settingsName').value.trim();
+            const newUsername = document.getElementById('settingsUsername').value.trim().toLowerCase();
+            const newBio = document.getElementById('settingsBio').value.trim() || 'Пользователь SignalWire';
+            const newPassword = document.getElementById('settingsNewPassword').value.trim();
+            const newPasswordConfirm = document.getElementById('settingsNewPasswordConfirm').value.trim();
+            
+            // Получаем выбранный аватар
+            let newAvatar = currentUser.avatar;
+            const selectedAvatar = document.querySelector('.avatar-option.selected');
+            if (selectedAvatar) newAvatar = selectedAvatar.textContent;
+            
+            // Получаем выбранный цвет
+            let newColor = currentUser.color;
+            const selectedColor = document.querySelector('.color-option.selected');
+            if (selectedColor) newColor = selectedColor.style.background;
+            
+            if (!newName || !newUsername) {
+                showNotification('❌ Имя и юзернейм обязательны!');
+                return;
+            }
+            
+            if (newUsername.length < 3) {
+                showNotification('❌ Юзернейм минимум 3 символа');
+                return;
+            }
+            
+            if (newPassword && newPassword.length < 6) {
+                showNotification('❌ Пароль должен быть минимум 6 символов');
+                return;
+            }
+            
+            if (newPassword !== newPasswordConfirm) {
+                showNotification('❌ Пароли не совпадают!');
+                return;
+            }
+            
+            const updates = {};
+            const oldUsername = currentUser.username;
+            
+            const saveProfile = () => {
+                currentUser.name = newName;
+                currentUser.username = newUsername;
+                currentUser.bio = newBio;
+                currentUser.avatar = newAvatar;
+                currentUser.color = newColor;
+                if (newPassword) currentUser.password = newPassword;
+                
+                updates['users/' + currentUser.id] = currentUser;
+                
+                database.ref().update(updates)
+                    .then(() => {
+                        localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
+                        updateUserCard();
+                        document.getElementById('settingsModal').style.display = 'none';
+                        loadUsers();
+                        showNotification('✅ Профиль обновлен!');
+                    });
+            };
+            
+            if (newUsername !== oldUsername) {
+                database.ref('usernames/' + newUsername).once('value')
+                    .then(snapshot => {
+                        if (snapshot.exists() && snapshot.val() !== currentUser.id) {
+                            showNotification('❌ Юзернейм занят!');
+                            return;
+                        }
+                        
+                        updates['usernames/' + oldUsername] = null;
+                        updates['usernames/' + newUsername] = currentUser.id;
+                        saveProfile();
+                    });
+            } else {
+                saveProfile();
+            }
+        });
         
         // ========== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ==========
         function loadUsers() {
-            if (!database) return;
-            
             database.ref('users').on('value', snapshot => {
                 allUsers = snapshot.val() || {};
                 
@@ -726,6 +1227,7 @@
                             ${user.name}
                             <span class="contact-username">@${user.username}</span>
                         </h4>
+                        <div class="contact-bio">${user.bio || 'Пользователь SignalWire'}</div>
                     </div>
                 `;
                 
@@ -747,9 +1249,10 @@
                     ${user.avatar || '👤'}
                     <div class="${isOnline ? 'online-badge' : 'offline-badge'}"></div>
                 </div>
-                <div>
+                <div class="chat-user-info">
                     <h3>${user.name}</h3>
-                    <span style="color: #0088cc;">@${user.username}</span>
+                    <span class="chat-user-username">@${user.username}</span>
+                    <div class="chat-user-bio">${user.bio || ''}</div>
                 </div>
             `;
             
@@ -772,21 +1275,23 @@
                 const messages = snapshot.val() || {};
                 messagesContainer.innerHTML = '';
                 
-                Object.values(messages).sort((a, b) => a.timestamp - b.timestamp).forEach(msg => {
-                    const message = document.createElement('div');
-                    message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
-                    
-                    const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
-                        hour: '2-digit', minute: '2-digit'
+                Object.values(messages)
+                    .sort((a, b) => a.timestamp - b.timestamp)
+                    .forEach(msg => {
+                        const message = document.createElement('div');
+                        message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
+                        
+                        const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
+                            hour: '2-digit', minute: '2-digit'
+                        });
+                        
+                        message.innerHTML = `
+                            <div class="message-text">${msg.text}</div>
+                            <div class="message-time">${time}</div>
+                        `;
+                        
+                        messagesContainer.appendChild(message);
                     });
-                    
-                    message.innerHTML = `
-                        <div class="message-text">${msg.text}</div>
-                        <div class="message-time">${time}</div>
-                    `;
-                    
-                    messagesContainer.appendChild(message);
-                });
                 
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             });
@@ -825,14 +1330,13 @@
         
         // ========== FIREBASE СЛУШАТЕЛИ ==========
         function setupFirebaseListeners() {
-            if (!database || !currentUser) return;
-            
             database.ref('online/' + currentUser.id).set(true);
             database.ref('online/' + currentUser.id).onDisconnect().set(false);
             
             setInterval(() => {
                 if (currentUser) {
                     database.ref('online/' + currentUser.id).set(true);
+                    database.ref('users/' + currentUser.id + '/lastSeen').set(Date.now());
                 }
             }, 30000);
         }
@@ -848,7 +1352,7 @@
         // ========== ВОССТАНОВЛЕНИЕ СЕССИИ ==========
         window.addEventListener('load', function() {
             const savedUser = localStorage.getItem('signalwire_user');
-            if (savedUser && database) {
+            if (savedUser) {
                 try {
                     currentUser = JSON.parse(savedUser);
                     database.ref('users/' + currentUser.id).once('value')
@@ -861,12 +1365,32 @@
                                 updateUserCard();
                                 loadUsers();
                                 setupFirebaseListeners();
+                                showNotification('👋 С возвращением!');
+                            } else {
+                                localStorage.removeItem('signalwire_user');
                             }
                         });
                 } catch (e) {
                     localStorage.removeItem('signalwire_user');
                 }
             }
+        });
+        
+        // ========== ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ ВНЕ ==========
+        window.addEventListener('click', function(e) {
+            const settingsModal = document.getElementById('settingsModal');
+            if (e.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+        
+        // ========== ВХОД ПО ENTER ==========
+        document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') login();
+        });
+        
+        document.getElementById('regPasswordConfirm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') register();
         });
     </script>
 </body>
