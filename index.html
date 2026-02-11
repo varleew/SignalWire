@@ -2,16 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>SignalWire - Мессенджер</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ========== ГЛОБАЛЬНЫЕ СТИЛИ ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.2s ease;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -19,10 +20,13 @@
             color: #fff;
             display: flex;
             height: 100vh;
+            height: -webkit-fill-available;
             overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
         
-        /* ========== ОКНО ВХОДА/РЕГИСТРАЦИИ ========== */
+        /* ========== ОКНО АВТОРИЗАЦИИ ========== */
         .auth-modal {
             position: fixed;
             top: 0;
@@ -34,49 +38,83 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            padding: 16px;
+            overflow-y: auto;
         }
         
         .auth-box {
             background: #111;
-            padding: 40px;
-            border-radius: 10px;
+            padding: 24px;
+            border-radius: 24px;
             border: 1px solid #333;
-            width: 400px;
+            width: 100%;
+            max-width: 440px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .auth-box {
+                padding: 40px;
+            }
         }
         
         .auth-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .auth-title i {
-            font-size: 48px;
+            font-size: 60px;
             color: #0088cc;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .auth-title h2 {
-            font-size: 28px;
+            font-size: 32px;
             color: #0088cc;
+            font-weight: 700;
         }
         
         .auth-tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #333;
+            margin-bottom: 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 4px;
         }
         
         .auth-tab {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
             color: #777;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.2s;
         }
         
         .auth-tab.active {
+            background: #0088cc;
+            color: white;
+        }
+        
+        .slogan {
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            border: 1px solid #333;
+        }
+        
+        .slogan i {
             color: #0088cc;
-            border-bottom: 2px solid #0088cc;
+            margin: 0 4px;
         }
         
         .auth-form {
@@ -87,69 +125,120 @@
             display: none;
         }
         
-        .slogan {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border-left: 4px solid #0088cc;
-            text-align: center;
+        .auth-input-group {
+            margin-bottom: 16px;
+        }
+        
+        .auth-label {
+            display: block;
             color: #aaa;
+            font-size: 14px;
+            margin-bottom: 6px;
+            font-weight: 500;
         }
         
         .auth-input {
             width: 100%;
-            padding: 14px;
-            margin: 10px 0;
+            padding: 16px;
             background: #222;
             border: 1px solid #333;
-            border-radius: 5px;
+            border-radius: 14px;
             color: #fff;
-            font-size: 15px;
+            font-size: 16px;
+            -webkit-appearance: none;
         }
         
         .auth-input:focus {
             border-color: #0088cc;
             outline: none;
+            box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
         }
         
         .username-check {
-            margin-top: 5px;
-            margin-bottom: 10px;
+            margin-top: 8px;
             font-size: 13px;
             color: #888;
             min-height: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
         .auth-button {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #0088cc;
             border: none;
-            border-radius: 5px;
+            border-radius: 14px;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 24px;
+            -webkit-appearance: none;
+            transition: all 0.2s;
         }
         
         .auth-button:hover {
             background: #0077b3;
+            transform: translateY(-1px);
+        }
+        
+        .auth-button i {
+            margin-right: 8px;
+        }
+        
+        /* ========== ОСНОВНОЙ ИНТЕРФЕЙС ========== */
+        .app {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
         
         /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
         .sidebar {
-            width: 350px;
+            width: 100%;
+            max-width: 380px;
             background: #111;
             border-right: 1px solid #333;
-            display: none;
+            display: flex;
             flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .header {
-            padding: 20px;
+        .sidebar.visible {
+            transform: translateX(0);
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar {
+                position: relative;
+                transform: translateX(0);
+                display: flex !important;
+            }
+            
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+        }
+        
+        .sidebar-header {
+            padding: 16px;
             border-bottom: 1px solid #333;
+        }
+        
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
         
         .logo {
@@ -157,87 +246,142 @@
             align-items: center;
             gap: 10px;
             color: #0088cc;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 14px;
+            color: #fff;
+            cursor: pointer;
             font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
         }
         
         .user-card {
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            flex: 1;
         }
         
         .user-avatar {
-            width: 45px;
-            height: 45px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
+            flex-shrink: 0;
         }
         
-        .user-info h4 {
-            font-size: 16px;
+        .user-details {
+            min-width: 0;
+            flex: 1;
+        }
+        
+        .user-details h4 {
+            font-size: 17px;
+            font-weight: 600;
             margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .user-info p {
-            font-size: 12px;
+        .user-details p {
+            font-size: 13px;
             color: #0088cc;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .settings-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             background: #333;
             border: none;
             color: #fff;
             cursor: pointer;
+            font-size: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .settings-btn:hover {
             background: #0088cc;
-            transform: rotate(90deg);
         }
         
         .search-box {
             position: relative;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .search-box input {
             width: 100%;
-            padding: 12px 12px 12px 40px;
+            padding: 14px 14px 14px 48px;
             background: #222;
             border: 1px solid #333;
-            border-radius: 20px;
+            border-radius: 16px;
             color: #fff;
+            font-size: 16px;
+            -webkit-appearance: none;
+        }
+        
+        .search-box input:focus {
+            border-color: #0088cc;
+            outline: none;
         }
         
         .search-box i {
             position: absolute;
-            left: 15px;
-            top: 12px;
+            left: 18px;
+            top: 14px;
             color: #777;
+            font-size: 18px;
         }
         
-        .contacts {
+        .contacts-wrapper {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 0;
+            padding: 12px 0;
+            -webkit-overflow-scrolling: touch;
         }
         
         .section-title {
-            padding: 10px 20px;
+            padding: 12px 20px;
             color: #777;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .contact {
@@ -245,36 +389,38 @@
             align-items: center;
             padding: 12px 20px;
             cursor: pointer;
-            border-bottom: 1px solid #222;
+            transition: all 0.2s;
         }
         
-        .contact:hover {
-            background: #222;
+        .contact:hover,
+        .contact:active {
+            background: #1a1a1a;
         }
         
         .contact.active {
-            background: #222;
+            background: #1a1a1a;
             border-left: 4px solid #0088cc;
         }
         
         .contact-avatar {
-            width: 45px;
-            height: 45px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            margin-right: 15px;
+            font-size: 22px;
+            margin-right: 16px;
             position: relative;
+            flex-shrink: 0;
         }
         
         .online-badge {
             position: absolute;
             bottom: 2px;
             right: 2px;
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #00ff00;
             border: 2px solid #111;
@@ -284,161 +430,216 @@
             position: absolute;
             bottom: 2px;
             right: 2px;
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #777;
             border: 2px solid #111;
         }
         
+        .contact-info {
+            min-width: 0;
+            flex: 1;
+        }
+        
         .contact-info h4 {
-            font-size: 15px;
-            margin-bottom: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         
         .contact-username {
-            font-size: 12px;
+            font-size: 13px;
             color: #0088cc;
-            background: rgba(0,136,204,0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 5px;
+            background: rgba(0,136,204,0.15);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
         }
         
         .contact-bio {
-            font-size: 12px;
+            font-size: 13px;
             color: #aaa;
-            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         /* ========== ЧАТ ========== */
         .chat-container {
             flex: 1;
-            display: none;
+            display: flex;
             flex-direction: column;
             background: #000;
+            position: relative;
+            width: 100%;
         }
         
         .chat-header {
-            padding: 15px 20px;
+            padding: 12px 16px;
             background: #111;
             border-bottom: 1px solid #333;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 12px;
+        }
+        
+        .mobile-back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 14px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-back-btn {
+                display: none;
+            }
         }
         
         .chat-user {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
         }
         
         .chat-user-avatar {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             position: relative;
+            flex-shrink: 0;
+        }
+        
+        .chat-user-info {
+            min-width: 0;
+            flex: 1;
         }
         
         .chat-user-info h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .chat-user-username {
             font-size: 13px;
             color: #0088cc;
-        }
-        
-        .chat-user-bio {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 2px;
-        }
-        
-        .chat-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .chat-actions i {
-            font-size: 18px;
-            color: #aaa;
-            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .messages {
             flex: 1;
-            padding: 20px;
+            padding: 20px 16px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+            -webkit-overflow-scrolling: touch;
         }
         
         .message {
-            max-width: 70%;
-            padding: 12px 15px;
-            border-radius: 18px;
+            max-width: 85%;
+            padding: 14px 18px;
+            border-radius: 22px;
+            position: relative;
+            word-wrap: break-word;
+        }
+        
+        @media (min-width: 768px) {
+            .message {
+                max-width: 65%;
+            }
         }
         
         .message.sent {
             background: #0088cc;
             align-self: flex-end;
-            border-bottom-right-radius: 5px;
+            border-bottom-right-radius: 6px;
         }
         
         .message.received {
             background: #222;
             align-self: flex-start;
-            border-bottom-left-radius: 5px;
+            border-bottom-left-radius: 6px;
         }
         
         .message-text {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 6px;
         }
         
         .message-time {
             font-size: 11px;
             color: rgba(255,255,255,0.7);
-            margin-top: 5px;
             text-align: right;
         }
         
         .input-area {
-            padding: 20px;
+            padding: 16px;
             background: #111;
             border-top: 1px solid #333;
             display: flex;
-            gap: 15px;
+            gap: 12px;
+            align-items: center;
         }
         
         .message-input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 16px 20px;
             background: #222;
             border: 1px solid #333;
-            border-radius: 25px;
+            border-radius: 30px;
             color: #fff;
-            font-size: 14px;
+            font-size: 16px;
             outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .message-input:focus {
+            border-color: #0088cc;
         }
         
         .send-button {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: #0088cc;
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .send-button:hover {
+            transform: scale(1.05);
         }
         
         .chat-placeholder {
@@ -447,108 +648,121 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 30px 20px;
             text-align: center;
         }
         
         .chat-placeholder i {
-            font-size: 70px;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 80px;
+            color: #222;
+            margin-bottom: 24px;
         }
         
-        /* ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ========== */
+        .chat-placeholder h2 {
+            color: #444;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        
+        .chat-placeholder p {
+            color: #555;
+            font-size: 16px;
+        }
+        
+        /* ========== МОДАЛКА НАСТРОЕК ========== */
         .settings-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 10000;
+            z-index: 1000;
+            padding: 16px;
+            overflow-y: auto;
         }
         
         .settings-box {
             background: #111;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 24px;
+            border-radius: 24px;
             border: 1px solid #333;
-            width: 450px;
-            max-width: 90%;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .settings-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
         
         .settings-header h2 {
             color: #0088cc;
+            font-size: 24px;
         }
         
         .close-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             background: #222;
             border: 1px solid #333;
             color: #fff;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
         
         .settings-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         .settings-label {
             display: block;
             color: #aaa;
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
         
-        .settings-input, .settings-textarea {
+        .settings-input,
+        .settings-textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: #222;
             border: 1px solid #333;
-            border-radius: 5px;
+            border-radius: 14px;
             color: #fff;
-            font-size: 14px;
+            font-size: 16px;
         }
         
-        .settings-textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
-        .avatar-selector {
+        .avatar-selector,
+        .color-selector {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-top: 10px;
         }
         
         .avatar-option {
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: #222;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 26px;
             cursor: pointer;
             border: 2px solid transparent;
-        }
-        
-        .avatar-option:hover {
-            border-color: #0088cc;
         }
         
         .avatar-option.selected {
@@ -556,64 +770,68 @@
             background: #333;
         }
         
-        .color-selector {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        
         .color-option {
-            width: 30px;
-            height: 30px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
         }
         
-        .color-option:hover {
-            transform: scale(1.1);
-        }
-        
         .color-option.selected {
             border-color: #fff;
+            transform: scale(1.1);
         }
         
         .settings-save-btn {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             background: #0088cc;
             border: none;
-            border-radius: 5px;
+            border-radius: 14px;
             color: white;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 24px;
         }
         
         .notification {
             position: fixed;
             bottom: 20px;
+            left: 20px;
             right: 20px;
             background: #111;
             border: 1px solid #333;
             border-left: 4px solid #0088cc;
-            padding: 15px 20px;
-            border-radius: 5px;
+            padding: 16px 20px;
+            border-radius: 16px;
             display: none;
             z-index: 10001;
-            max-width: 300px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .notification {
+                left: auto;
+                right: 20px;
+                width: 350px;
+            }
         }
         
         .logout-btn {
-            padding: 8px 15px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             background: #333;
-            border: 1px solid #444;
-            border-radius: 5px;
+            border: none;
             color: #fff;
             cursor: pointer;
-            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
         
         .logout-btn:hover {
@@ -632,10 +850,17 @@
             background: #333;
             border-radius: 3px;
         }
+        
+        .no-users {
+            padding: 40px 20px;
+            text-align: center;
+            color: #777;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <!-- ========== ОКНО ВХОДА/РЕГИСТРАЦИИ ========== -->
+    <!-- ========== ОКНО АВТОРИЗАЦИИ ========== -->
     <div class="auth-modal" id="authModal">
         <div class="auth-box">
             <div class="auth-title">
@@ -644,7 +869,7 @@
             </div>
             
             <div class="slogan">
-                <i class="fas fa-bolt"></i> SignalWire — НОВАЯ ЭРА МЕССЕНДЖЕРОВ <i class="fas fa-rocket"></i>
+                <i class="fas fa-bolt"></i> Новая эра мессенджеров <i class="fas fa-rocket"></i>
             </div>
             
             <div class="auth-tabs">
@@ -654,8 +879,14 @@
             
             <!-- Форма входа -->
             <div class="auth-form" id="loginForm">
-                <input type="text" class="auth-input" id="loginUsername" placeholder="Юзернейм" maxlength="20">
-                <input type="password" class="auth-input" id="loginPassword" placeholder="Пароль" maxlength="50">
+                <div class="auth-input-group">
+                    <label class="auth-label">Юзернейм</label>
+                    <input type="text" class="auth-input" id="loginUsername" placeholder="@username" maxlength="20">
+                </div>
+                <div class="auth-input-group">
+                    <label class="auth-label">Пароль</label>
+                    <input type="password" class="auth-input" id="loginPassword" placeholder="••••••••" maxlength="50">
+                </div>
                 <button class="auth-button" id="loginBtn">
                     <i class="fas fa-sign-in-alt"></i> Войти
                 </button>
@@ -663,12 +894,27 @@
             
             <!-- Форма регистрации -->
             <div class="auth-form hidden" id="registerForm">
-                <input type="text" class="auth-input" id="regName" placeholder="Ваше имя" maxlength="30">
-                <input type="text" class="auth-input" id="regUsername" placeholder="Юзернейм" maxlength="20">
-                <div class="username-check" id="usernameCheck">Введите юзернейм</div>
-                <input type="password" class="auth-input" id="regPassword" placeholder="Пароль" maxlength="50">
-                <input type="password" class="auth-input" id="regPasswordConfirm" placeholder="Повторите пароль" maxlength="50">
-                <input type="text" class="auth-input" id="regBio" placeholder="О себе (необязательно)" maxlength="100">
+                <div class="auth-input-group">
+                    <label class="auth-label">Имя</label>
+                    <input type="text" class="auth-input" id="regName" placeholder="Иван Иванов" maxlength="30">
+                </div>
+                <div class="auth-input-group">
+                    <label class="auth-label">Юзернейм</label>
+                    <input type="text" class="auth-input" id="regUsername" placeholder="ivanov" maxlength="20">
+                    <div class="username-check" id="usernameCheck">Введите юзернейм</div>
+                </div>
+                <div class="auth-input-group">
+                    <label class="auth-label">Пароль</label>
+                    <input type="password" class="auth-input" id="regPassword" placeholder="Минимум 6 символов" maxlength="50">
+                </div>
+                <div class="auth-input-group">
+                    <label class="auth-label">Повторите пароль</label>
+                    <input type="password" class="auth-input" id="regPasswordConfirm" placeholder="••••••••" maxlength="50">
+                </div>
+                <div class="auth-input-group">
+                    <label class="auth-label">О себе</label>
+                    <input type="text" class="auth-input" id="regBio" placeholder="Дизайнер, разработчик..." maxlength="100">
+                </div>
                 <button class="auth-button" id="registerBtn">
                     <i class="fas fa-user-plus"></i> Зарегистрироваться
                 </button>
@@ -680,7 +926,7 @@
     <div class="settings-modal" id="settingsModal">
         <div class="settings-box">
             <div class="settings-header">
-                <h2><i class="fas fa-cog"></i> Настройки профиля</h2>
+                <h2><i class="fas fa-cog"></i> Настройки</h2>
                 <button class="close-btn" id="closeSettingsBtn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -692,7 +938,7 @@
             </div>
             
             <div class="settings-group">
-                <label class="settings-label">Цвет профиля</label>
+                <label class="settings-label">Цвет</label>
                 <div class="color-selector" id="colorSelector"></div>
             </div>
             
@@ -704,80 +950,86 @@
             <div class="settings-group">
                 <label class="settings-label">Юзернейм</label>
                 <input type="text" class="settings-input" id="settingsUsername" maxlength="20">
-                <div style="font-size: 12px; color: #777; margin-top: 5px;">
-                    <i class="fas fa-info-circle"></i> После смены юзернейма старый освобождается
-                </div>
             </div>
             
             <div class="settings-group">
                 <label class="settings-label">О себе</label>
-                <textarea class="settings-textarea" id="settingsBio" maxlength="100"></textarea>
+                <textarea class="settings-textarea" id="settingsBio" maxlength="100" rows="3"></textarea>
             </div>
             
             <div class="settings-group">
-                <label class="settings-label">Новый пароль (если хотите сменить)</label>
-                <input type="password" class="settings-input" id="settingsNewPassword" placeholder="Оставьте пустым, если не меняете" maxlength="50">
-                <input type="password" class="settings-input" id="settingsNewPasswordConfirm" placeholder="Подтвердите новый пароль" maxlength="50">
+                <label class="settings-label">Новый пароль</label>
+                <input type="password" class="settings-input" id="settingsNewPassword" placeholder="Оставьте пустым, если не меняете">
+                <input type="password" class="settings-input" id="settingsNewPasswordConfirm" placeholder="Подтвердите пароль" style="margin-top: 8px;">
             </div>
             
             <button class="settings-save-btn" id="saveSettingsBtn">
-                <i class="fas fa-save"></i> Сохранить изменения
+                <i class="fas fa-save"></i> Сохранить
             </button>
         </div>
     </div>
     
-    <!-- ========== БОКОВАЯ ПАНЕЛЬ ========== -->
-    <div class="sidebar" id="sidebar">
-        <div class="header">
-            <div class="logo">
-                <i class="fas fa-paper-plane"></i>
-                <span>SignalWire</span>
-                <button class="logout-btn" id="logoutBtn" title="Выйти">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-            
-            <div class="user-card" id="userCard"></div>
-            
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Поиск по имени или @юзернейму...">
-            </div>
-        </div>
-        
-        <div style="padding: 10px 20px 0;">
-            <div class="section-title">📱 ПОЛЬЗОВАТЕЛИ</div>
-        </div>
-        
-        <div class="contacts" id="contactsList"></div>
-    </div>
-    
-    <!-- ========== ЧАТ ========== -->
-    <div class="chat-container" id="chatContainer">
-        <div class="chat-placeholder" id="chatPlaceholder">
-            <i class="fas fa-comments"></i>
-            <h2>Добро пожаловать в SignalWire!</h2>
-            <p>Выберите собеседника из списка слева</p>
-        </div>
-        
-        <div style="display: none; flex-direction: column; height: 100%;" id="chatActive">
-            <div class="chat-header">
-                <div class="chat-user" id="currentChatUser"></div>
-                <div class="chat-actions">
-                    <i class="fas fa-phone-alt"></i>
-                    <i class="fas fa-video"></i>
+    <!-- ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== -->
+    <div class="app" id="app">
+        <!-- Боковая панель -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-row">
+                    <div class="logo">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>SignalWire</span>
+                    </div>
+                    <button class="mobile-menu-btn" id="closeSidebarBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="user-card" id="userCard"></div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Поиск по имени или @юзернейму...">
                 </div>
             </div>
-            <div class="messages" id="messagesContainer"></div>
-            <div class="input-area">
-                <input type="text" class="message-input" id="messageInput" placeholder="Введите сообщение...">
-                <button class="send-button" id="sendButton">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            
+            <div class="contacts-wrapper">
+                <div class="section-title">📱 ПОЛЬЗОВАТЕЛИ</div>
+                <div id="contactsList"></div>
+            </div>
+        </div>
+        
+        <!-- Чат -->
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-placeholder" id="chatPlaceholder">
+                <i class="fas fa-comments"></i>
+                <h2>Добро пожаловать!</h2>
+                <p>Выберите собеседника из списка</p>
+            </div>
+            
+            <div style="display: none; flex-direction: column; height: 100%;" id="chatActive">
+                <div class="chat-header">
+                    <button class="mobile-back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="chat-user" id="currentChatUser"></div>
+                    <button class="logout-btn" id="logoutBtn" title="Выйти">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="messages" id="messagesContainer"></div>
+                
+                <div class="input-area">
+                    <input type="text" class="message-input" id="messageInput" placeholder="Сообщение...">
+                    <button class="send-button" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     
+    <!-- ========== УВЕДОМЛЕНИЯ ========== -->
     <div class="notification" id="notification">
         <div id="notificationText"></div>
     </div>
@@ -810,8 +1062,8 @@
         let usernameCheckTimeout;
         
         // Аватары и цвета
-        const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓', '👨‍🚀', '👩‍🚀', '🦸', '🦸‍♀️', '🧙', '🧙‍♀️', '🐱', '🐶', '🦊', '🐼', '🐧'];
-        const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#795548', '#4a6fa5', '#588157', '#bc6c25', '#9c27b0', '#e91e63', '#ff9800', '#4caf50'];
+        const avatars = ['👨', '👩', '🧑', '👨‍💻', '👩‍💻', '👨‍🎓', '👩‍🎓', '👨‍🚀', '👩‍🚀', '🦸', '🦸‍♀️', '🧙', '🐱', '🐶', '🦊', '🐼', '🐧', '🦁', '🐨', '🐸'];
+        const colors = ['#0088cc', '#2b5278', '#3a506b', '#5d5179', '#795548', '#4a6fa5', '#588157', '#bc6c25', '#9c27b0', '#e91e63', '#ff9800', '#4caf50', '#2196f3', '#f44336', '#9c27b0', '#00bcd4'];
         
         // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ВХОДОМ И РЕГИСТРАЦИЕЙ ==========
         document.getElementById('loginTab').addEventListener('click', function() {
@@ -829,10 +1081,11 @@
         });
         
         // ========== СКРЫВАЕМ ИНТЕРФЕЙС ПРИ ЗАГРУЗКЕ ==========
-        document.getElementById('sidebar').style.display = 'none';
+        document.getElementById('sidebar').classList.remove('visible');
         document.getElementById('chatContainer').style.display = 'none';
+        document.getElementById('app').style.display = 'none';
         
-        // ========== ПРОВЕРКА ЮЗЕРНЕЙМА ПРИ РЕГИСТРАЦИИ ==========
+        // ========== ПРОВЕРКА ЮЗЕРНЕЙМА ==========
         document.getElementById('regUsername').addEventListener('input', function() {
             clearTimeout(usernameCheckTimeout);
             const username = this.value.toLowerCase().replace(/[^a-z0-9_]/g, '');
@@ -923,7 +1176,7 @@
                     }
                     
                     // Создаем пользователя
-                    const userId = 'user_' + Date.now();
+                    const userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
                     
                     currentUser = {
                         id: userId,
@@ -950,14 +1203,15 @@
                     localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
                     
                     document.getElementById('authModal').style.display = 'none';
-                    document.getElementById('sidebar').style.display = 'flex';
+                    document.getElementById('app').style.display = 'flex';
                     document.getElementById('chatContainer').style.display = 'flex';
+                    document.getElementById('sidebar').classList.add('visible');
                     
                     updateUserCard();
                     loadUsers();
                     setupFirebaseListeners();
                     
-                    showNotification('🚀 Добро пожаловать в SignalWire, ' + name + '!');
+                    showNotification('🚀 Добро пожаловать, ' + name + '!');
                 })
                 .catch(error => {
                     console.error(error);
@@ -965,7 +1219,7 @@
                 });
         }
         
-        // ========== ВХОД В АККАУНТ ==========
+        // ========== ВХОД ==========
         document.getElementById('loginBtn').addEventListener('click', login);
         
         function login() {
@@ -1011,8 +1265,9 @@
                     localStorage.setItem('signalwire_user', JSON.stringify(currentUser));
                     
                     document.getElementById('authModal').style.display = 'none';
-                    document.getElementById('sidebar').style.display = 'flex';
+                    document.getElementById('app').style.display = 'flex';
                     document.getElementById('chatContainer').style.display = 'flex';
+                    document.getElementById('sidebar').classList.add('visible');
                     
                     updateUserCard();
                     loadUsers();
@@ -1026,7 +1281,7 @@
                 });
         }
         
-        // ========== ВЫХОД ИЗ АККАУНТА ==========
+        // ========== ВЫХОД ==========
         document.getElementById('logoutBtn').addEventListener('click', function() {
             if (confirm('Вы действительно хотите выйти?')) {
                 database.ref('online/' + currentUser.id).set(false);
@@ -1042,14 +1297,13 @@
             if (!currentUser) return;
             
             card.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="user-info">
                     <div class="user-avatar" style="background: ${currentUser.color}">
                         ${currentUser.avatar}
                     </div>
-                    <div class="user-info">
+                    <div class="user-details">
                         <h4>${currentUser.name}</h4>
                         <p>@${currentUser.username}</p>
-                        <div style="font-size: 11px; color: #aaa;">${currentUser.bio || ''}</div>
                     </div>
                 </div>
                 <button class="settings-btn" id="openSettingsBtn">
@@ -1062,16 +1316,13 @@
             }, 100);
         }
         
-        // ========== НАСТРОЙКИ ПРОФИЛЯ ==========
+        // ========== НАСТРОЙКИ ==========
         function openSettings() {
-            // Заполняем текущими данными
             document.getElementById('settingsName').value = currentUser.name;
             document.getElementById('settingsUsername').value = currentUser.username;
             document.getElementById('settingsBio').value = currentUser.bio || '';
-            document.getElementById('settingsNewPassword').value = '';
-            document.getElementById('settingsNewPasswordConfirm').value = '';
             
-            // Заполняем аватары
+            // Аватары
             const avatarSelector = document.getElementById('avatarSelector');
             avatarSelector.innerHTML = '';
             avatars.forEach(avatar => {
@@ -1085,7 +1336,7 @@
                 avatarSelector.appendChild(div);
             });
             
-            // Заполняем цвета
+            // Цвета
             const colorSelector = document.getElementById('colorSelector');
             colorSelector.innerHTML = '';
             colors.forEach(color => {
@@ -1111,20 +1362,19 @@
             const newUsername = document.getElementById('settingsUsername').value.trim().toLowerCase();
             const newBio = document.getElementById('settingsBio').value.trim() || 'Пользователь SignalWire';
             const newPassword = document.getElementById('settingsNewPassword').value.trim();
-            const newPasswordConfirm = document.getElementById('settingsNewPasswordConfirm').value.trim();
             
-            // Получаем выбранный аватар
+            // Аватар
             let newAvatar = currentUser.avatar;
             const selectedAvatar = document.querySelector('.avatar-option.selected');
             if (selectedAvatar) newAvatar = selectedAvatar.textContent;
             
-            // Получаем выбранный цвет
+            // Цвет
             let newColor = currentUser.color;
             const selectedColor = document.querySelector('.color-option.selected');
             if (selectedColor) newColor = selectedColor.style.background;
             
             if (!newName || !newUsername) {
-                showNotification('❌ Имя и юзернейм обязательны!');
+                showNotification('❌ Заполните все поля!');
                 return;
             }
             
@@ -1134,12 +1384,7 @@
             }
             
             if (newPassword && newPassword.length < 6) {
-                showNotification('❌ Пароль должен быть минимум 6 символов');
-                return;
-            }
-            
-            if (newPassword !== newPasswordConfirm) {
-                showNotification('❌ Пароли не совпадают!');
+                showNotification('❌ Пароль минимум 6 символов');
                 return;
             }
             
@@ -1183,10 +1428,11 @@
             }
         });
         
-        // ========== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ==========
+        // ========== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ (ИСПРАВЛЕН ПОИСК) ==========
         function loadUsers() {
             database.ref('users').on('value', snapshot => {
                 allUsers = snapshot.val() || {};
+                console.log('Загружены пользователи:', Object.keys(allUsers).length);
                 
                 database.ref('online').on('value', onlineSnapshot => {
                     onlineUsers = onlineSnapshot.val() || {};
@@ -1197,21 +1443,43 @@
         
         function renderUsersList() {
             const contactsList = document.getElementById('contactsList');
-            if (!contactsList || !currentUser) return;
+            if (!contactsList || !currentUser) {
+                console.log('Нет currentUser');
+                return;
+            }
             
             contactsList.innerHTML = '';
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            console.log('Поиск:', searchTerm);
             
-            const users = Object.entries(allUsers)
-                .filter(([id]) => id !== currentUser.id)
-                .map(([id, user]) => ({ id, ...user }))
-                .sort((a, b) => (onlineUsers[b.id] ? 1 : 0) - (onlineUsers[a.id] ? 1 : 0));
+            const users = [];
+            for (const userId in allUsers) {
+                if (userId === currentUser.id) continue;
+                users.push({ id: userId, ...allUsers[userId] });
+            }
+            
+            console.log('Другие пользователи:', users.length);
+            
+            // Сортировка: онлайн сверху
+            users.sort((a, b) => {
+                const aOnline = onlineUsers[a.id] ? 1 : 0;
+                const bOnline = onlineUsers[b.id] ? 1 : 0;
+                return bOnline - aOnline;
+            });
+            
+            let hasUsers = false;
             
             users.forEach(user => {
                 const isOnline = onlineUsers[user.id] === true;
                 
-                const searchString = (user.name + ' ' + user.username).toLowerCase();
-                if (searchTerm && !searchString.includes(searchTerm)) return;
+                // ПОИСК ПО ИМЕНИ И ЮЗЕРНЕЙМУ - ИСПРАВЛЕНО!
+                const nameMatch = user.name.toLowerCase().includes(searchTerm);
+                const usernameMatch = user.username.toLowerCase().includes(searchTerm);
+                const searchMatch = !searchTerm || nameMatch || usernameMatch;
+                
+                if (!searchMatch) return;
+                
+                hasUsers = true;
                 
                 const contact = document.createElement('div');
                 contact.className = 'contact';
@@ -1234,10 +1502,22 @@
                 contact.addEventListener('click', () => startChat(user.id, user));
                 contactsList.appendChild(contact);
             });
+            
+            if (!hasUsers) {
+                const noUsers = document.createElement('div');
+                noUsers.className = 'no-users';
+                noUsers.innerHTML = searchTerm ? 
+                    '😕 Никого не найдено по запросу "' + searchTerm + '"' : 
+                    '👥 Пока нет других пользователей';
+                contactsList.appendChild(noUsers);
+            }
         }
         
         // ========== ПОИСК ==========
-        document.getElementById('searchInput').addEventListener('input', renderUsersList);
+        document.getElementById('searchInput').addEventListener('input', function() {
+            console.log('Поиск:', this.value);
+            renderUsersList();
+        });
         
         // ========== ЧАТ ==========
         function startChat(userId, user) {
@@ -1252,7 +1532,6 @@
                 <div class="chat-user-info">
                     <h3>${user.name}</h3>
                     <span class="chat-user-username">@${user.username}</span>
-                    <div class="chat-user-bio">${user.bio || ''}</div>
                 </div>
             `;
             
@@ -1263,6 +1542,11 @@
                 c.classList.remove('active');
                 if (c.dataset.userId === userId) c.classList.add('active');
             });
+            
+            // На мобильных скрываем сайдбар
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.remove('visible');
+            }
             
             loadMessages(userId);
         }
@@ -1297,10 +1581,10 @@
             });
         }
         
-        // ========== ОТПРАВКА СООБЩЕНИЙ ==========
+        // ========== ОТПРАВКА ==========
         document.getElementById('sendButton').addEventListener('click', sendMessage);
         document.getElementById('messageInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
             }
@@ -1328,7 +1612,16 @@
             input.value = '';
         }
         
-        // ========== FIREBASE СЛУШАТЕЛИ ==========
+        // ========== МОБИЛЬНЫЕ КНОПКИ ==========
+        document.getElementById('closeSidebarBtn').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('visible');
+        });
+        
+        document.getElementById('backBtn').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('visible');
+        });
+        
+        // ========== FIREBASE ==========
         function setupFirebaseListeners() {
             database.ref('online/' + currentUser.id).set(true);
             database.ref('online/' + currentUser.id).onDisconnect().set(false);
@@ -1360,8 +1653,9 @@
                             if (snapshot.exists()) {
                                 currentUser = snapshot.val();
                                 document.getElementById('authModal').style.display = 'none';
-                                document.getElementById('sidebar').style.display = 'flex';
+                                document.getElementById('app').style.display = 'flex';
                                 document.getElementById('chatContainer').style.display = 'flex';
+                                document.getElementById('sidebar').classList.add('visible');
                                 updateUserCard();
                                 loadUsers();
                                 setupFirebaseListeners();
@@ -1376,7 +1670,7 @@
             }
         });
         
-        // ========== ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ ВНЕ ==========
+        // ========== ЗАКРЫТИЕ МОДАЛКИ ==========
         window.addEventListener('click', function(e) {
             const settingsModal = document.getElementById('settingsModal');
             if (e.target === settingsModal) {
