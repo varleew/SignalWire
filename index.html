@@ -13,6 +13,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="SignalWire">
     
+    <!-- Иконки для iPhone -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230088cc'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>✈️</text></svg>">
+    
     <title>SignalWire - Анонимный мессенджер</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -34,7 +37,108 @@
             overflow: hidden;
             position: fixed;
             width: 100%;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* ========== АДАПТАЦИЯ ДЛЯ IPHONE ========== */
+        @supports (padding: max(0px)) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+            
+            .sidebar {
+                padding-top: env(safe-area-inset-top);
+            }
+            
+            .chat-header {
+                padding-top: max(12px, env(safe-area-inset-top));
+            }
+            
+            .input-area {
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* ========== СТИКЕРЫ ========== */
+        .sticker-panel {
+            position: absolute;
+            bottom: 90px;
+            left: 16px;
+            right: 16px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 24px;
+            padding: 16px;
+            display: none;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .sticker-panel.visible {
+            display: block;
+        }
+        
+        .sticker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            color: #0088cc;
+        }
+        
+        .sticker-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #222;
+            border: 1px solid #333;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sticker-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .sticker-item {
+            aspect-ratio: 1;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .sticker-item:hover {
+            background: #333;
+            transform: scale(1.05);
+            border-color: #0088cc;
+        }
+        
+        body.light-theme .sticker-panel {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+        }
+        
+        body.light-theme .sticker-item {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
         }
         
         /* ========== СВЕТЛАЯ ТЕМА ========== */
@@ -164,6 +268,11 @@
             to { transform: scale(1); opacity: 1; }
         }
         
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
         /* ========== ОКНО АВТОРИЗАЦИИ ========== */
         .auth-modal {
             position: fixed;
@@ -285,7 +394,7 @@
             gap: 8px;
         }
         
-        /* ========== САЙДБАР - БЕЗ КРЕСТИКА ========== */
+        /* ========== САЙДБАР ========== */
         .sidebar {
             width: 100%;
             max-width: 380px;
@@ -317,6 +426,7 @@
         
         .sidebar-header {
             padding: 16px;
+            padding-top: max(16px, env(safe-area-inset-top));
             border-bottom: 1px solid #333;
         }
         
@@ -491,6 +601,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 12px 0;
+            padding-bottom: max(12px, env(safe-area-inset-bottom));
         }
         
         .section-title {
@@ -562,6 +673,7 @@
         
         .chat-header {
             padding: 12px 16px;
+            padding-top: max(12px, env(safe-area-inset-top));
             background: #111;
             border-bottom: 1px solid #333;
             display: flex;
@@ -569,7 +681,6 @@
             gap: 12px;
         }
         
-        /* ===== ЕДИНСТВЕННАЯ СТРЕЛКА - СВЕРХУ СЛЕВА ===== */
         .chat-back-btn {
             display: flex;
             align-items: center;
@@ -678,12 +789,13 @@
         /* ========== ПАНЕЛЬ ВВОДА ========== */
         .input-area {
             padding: 16px;
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
             background: #111;
             border-top: 1px solid #333;
             display: flex;
             gap: 12px;
             align-items: center;
-            padding-bottom: calc(16px + env(safe-area-inset-bottom));
+            position: relative;
         }
         
         .sticker-btn {
@@ -699,6 +811,17 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        
+        .sticker-btn:hover {
+            background: #333;
+            color: #0088cc;
+        }
+        
+        .sticker-btn.active {
+            background: #0088cc;
+            color: white;
         }
         
         .message-input {
@@ -754,42 +877,6 @@
             flex-direction: column;
             height: 100%;
             width: 100%;
-        }
-        
-        /* ========== КНОПКА ВОЗВРАТА ТОЛЬКО НА ТЕЛЕФОНЕ ========== */
-        .nav-buttons {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            gap: 12px;
-            z-index: 300;
-        }
-        
-        .nav-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #0088cc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-            border: none;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-btn.hidden {
-            display: none;
-        }
-        
-        @media (min-width: 768px) {
-            .nav-buttons {
-                display: none;
-            }
         }
         
         /* ========== МОДАЛКИ ========== */
@@ -983,6 +1070,14 @@
             background: #333;
             border-radius: 3px;
         }
+        
+        /* Убираем лишние отступы на iPhone */
+        .app {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -1003,7 +1098,8 @@
                 </div>
                 <div style="color: #aaa; font-size: 14px; text-align: center;">
                     🔒 Номер телефона не нужен<br>
-                    🕵️ Только никнейм и пароль
+                    🕵️ Только никнейм и пароль<br>
+                    🎨 Стикеры уже здесь!
                 </div>
             </div>
             
@@ -1038,6 +1134,17 @@
                 </button>
             </div>
         </div>
+    </div>
+    
+    <!-- ========== СТИКЕРЫ ========== -->
+    <div class="sticker-panel" id="stickerPanel">
+        <div class="sticker-header">
+            <h3 style="color: #0088cc;"><i class="fas fa-smile"></i> Стикеры</h3>
+            <button class="sticker-close" id="closeStickerBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sticker-grid" id="stickerGrid"></div>
     </div>
     
     <!-- ========== МОДАЛКА ПРОФИЛЯ ========== -->
@@ -1125,7 +1232,7 @@
     
     <!-- ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== -->
     <div class="app" id="app">
-        <!-- САЙДБАР - БЕЗ КРЕСТИКА -->
+        <!-- САЙДБАР -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo-row">
@@ -1173,11 +1280,11 @@
                     Анонимный чат
                 </h2>
                 <p style="color: #444;">🔒 Найдите собеседника в поиске</p>
+                <p style="color: #444; margin-top: 16px;">😊 Нажмите на смайлик для стикеров</p>
             </div>
             
             <div style="display: none; flex-direction: column; height: 100%; width: 100%;" id="chatActive">
                 <div class="chat-header">
-                    <!-- ЕДИНСТВЕННАЯ СТРЕЛКА - СВЕРХУ СЛЕВА -->
                     <button class="chat-back-btn" id="chatBackBtn">
                         <i class="fas fa-arrow-left"></i>
                     </button>
@@ -1233,6 +1340,17 @@
         let messagesListener = null;
         let currentChatId = null;
         
+        // ========== СТИКЕРЫ ==========
+        const stickers = [
+            '😊', '😂', '🥰', '😎', '🤔', '😴', '🥳', '😱',
+            '👍', '👎', '👏', '🙏', '🔥', '✨', '⭐', '💯',
+            '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍',
+            '🐱', '🐶', '🐼', '🦊', '🐸', '🐨', '🦁', '🐧',
+            '🍕', '🍔', '🌮', '🍣', '🍩', '🍪', '☕', '🍺',
+            '⚽', '🏀', '🎮', '🎵', '🎨', '📱', '💻', '📷'
+        ];
+        
+        // ========== АВАТАРЫ ==========
         const avatars = [
             '👨', '👩', '🧑', '👨‍🦰', '👩‍🦰', '👨‍🦱', '👩‍🦱', 
             '👨‍🦲', '👩‍🦲', '👨‍🦳', '👩‍🦳', '🧔', '🧑‍🦰', 
@@ -1244,6 +1362,41 @@
             '#4a6fa5', '#588157', '#9c27b0', '#e91e63',
             '#ff9800', '#4caf50', '#2196f3', '#f44336'
         ];
+        
+        // ========== ИНИЦИАЛИЗАЦИЯ СТИКЕРОВ ==========
+        function initStickers() {
+            const stickerGrid = document.getElementById('stickerGrid');
+            stickerGrid.innerHTML = '';
+            stickers.forEach(sticker => {
+                const div = document.createElement('div');
+                div.className = 'sticker-item';
+                div.textContent = sticker;
+                div.onclick = () => {
+                    sendSticker(sticker);
+                    document.getElementById('stickerPanel').classList.remove('visible');
+                    document.getElementById('stickerBtn').classList.remove('active');
+                };
+                stickerGrid.appendChild(div);
+            });
+        }
+        
+        // ========== ОТПРАВКА СТИКЕРА ==========
+        function sendSticker(sticker) {
+            if (!currentChatUser) {
+                showNotification('❌ Выберите чат');
+                return;
+            }
+            
+            const chatId = [currentUser.id, currentChatUser.id].sort().join('_');
+            const messageId = database.ref('chats/' + chatId).push().key;
+            
+            database.ref('chats/' + chatId + '/' + messageId).set({
+                senderId: currentUser.id,
+                text: sticker,
+                isSticker: true,
+                timestamp: Date.now()
+            });
+        }
         
         // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
         function setTheme(theme) {
@@ -1267,6 +1420,8 @@
         
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         window.addEventListener('load', function() {
+            initStickers();
+            
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('loginTab').classList.add('active');
@@ -1792,7 +1947,6 @@
         
         // ========== НАЧАТЬ ЧАТ ==========
         function startChat(userId, user) {
-            // Удаляем старый слушатель
             if (messagesListener && currentChatId) {
                 database.ref('chats/' + currentChatId).off('value', messagesListener);
                 messagesListener = null;
@@ -1803,11 +1957,9 @@
             
             const isOnline = onlineUsers[userId] === true;
             
-            // Добавляем в список чатов
             userChats.add(userId);
             database.ref('userChats/' + currentUser.id + '/' + userId).set(true);
             
-            // Обновляем шапку чата
             document.getElementById('currentChatUser').innerHTML = `
                 <div class="chat-user-avatar" style="background: ${user.color || '#444'}">
                     ${user.avatar || '👤'}
@@ -1819,17 +1971,14 @@
                 </div>
             `;
             
-            // Добавляем обработчик на профиль
             const chatUserElement = document.querySelector('.chat-user');
             if (chatUserElement) {
                 chatUserElement.onclick = () => openUserProfile(currentChatUser);
             }
             
-            // Показываем чат, скрываем заглушку
             document.getElementById('chatPlaceholder').style.display = 'none';
             document.getElementById('chatActive').style.display = 'flex';
             
-            // На телефоне закрываем сайдбар
             if (window.innerWidth < 768) {
                 document.getElementById('sidebar').classList.remove('visible');
             }
@@ -1858,10 +2007,17 @@
                             hour: '2-digit', minute: '2-digit'
                         });
                         
-                        message.innerHTML = `
-                            <div class="message-text">${msg.text}</div>
-                            <div class="message-time">${time}</div>
-                        `;
+                        if (msg.isSticker) {
+                            message.innerHTML = `
+                                <div style="font-size: 48px; text-align: center;">${msg.text}</div>
+                                <div class="message-time">${time}</div>
+                            `;
+                        } else {
+                            message.innerHTML = `
+                                <div class="message-text">${msg.text}</div>
+                                <div class="message-time">${time}</div>
+                            `;
+                        }
                         
                         messagesContainer.appendChild(message);
                     });
@@ -1900,6 +2056,18 @@
             
             input.value = '';
         }
+        
+        // ========== СТИКЕРЫ ==========
+        document.getElementById('stickerBtn').addEventListener('click', function() {
+            const panel = document.getElementById('stickerPanel');
+            panel.classList.toggle('visible');
+            this.classList.toggle('active');
+        });
+        
+        document.getElementById('closeStickerBtn').addEventListener('click', function() {
+            document.getElementById('stickerPanel').classList.remove('visible');
+            document.getElementById('stickerBtn').classList.remove('active');
+        });
         
         // ========== ОТКРЫТЬ ПРОФИЛЬ ==========
         function openUserProfile(user) {
@@ -1988,11 +2156,6 @@
             setTimeout(() => notification.style.display = 'none', 3000);
         }
         
-        // ========== СТИКЕРЫ ==========
-        document.getElementById('stickerBtn').addEventListener('click', () => {
-            showNotification('🎨 Стикеры будут в следующем обновлении!');
-        });
-        
         // ========== ЗАКРЫТИЕ МОДАЛОК ==========
         window.addEventListener('click', function(e) {
             const settingsModal = document.getElementById('settingsModal');
@@ -2003,6 +2166,15 @@
             const profileModal = document.getElementById('userProfileModal');
             if (e.target === profileModal) {
                 profileModal.style.display = 'none';
+            }
+            
+            const stickerPanel = document.getElementById('stickerPanel');
+            const stickerBtn = document.getElementById('stickerBtn');
+            if (stickerPanel && stickerBtn) {
+                if (!stickerBtn.contains(e.target) && !stickerPanel.contains(e.target)) {
+                    stickerPanel.classList.remove('visible');
+                    stickerBtn.classList.remove('active');
+                }
             }
             
             const searchResults = document.getElementById('searchResults');
