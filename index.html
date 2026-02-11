@@ -85,17 +85,6 @@
             color: white;
         }
         
-        body.light-theme .close-sidebar-btn {
-            background: #e0e0e0;
-            border: 1px solid #ccc;
-            color: #333;
-        }
-        
-        body.light-theme .close-sidebar-btn:hover {
-            background: #ff4444;
-            color: white;
-        }
-        
         body.light-theme .search-section {
             background: #f5f5f5;
             border: 1px solid #e0e0e0;
@@ -105,10 +94,6 @@
             background: #fff;
             border: 1px solid #e0e0e0;
             color: #333;
-        }
-        
-        body.light-theme .search-box input::placeholder {
-            color: #999;
         }
         
         body.light-theme .chat-item {
@@ -124,10 +109,6 @@
             border-left: 4px solid #0088cc;
         }
         
-        body.light-theme .chat-item span {
-            color: #333;
-        }
-        
         body.light-theme .chat-container {
             background: #fff;
         }
@@ -135,12 +116,6 @@
         body.light-theme .chat-header {
             background: #fff;
             border-bottom: 1px solid #e0e0e0;
-        }
-        
-        body.light-theme .mobile-back-btn {
-            background: #f5f5f5;
-            border: 1px solid #e0e0e0;
-            color: #333;
         }
         
         body.light-theme .chat-user-info h3 {
@@ -173,84 +148,6 @@
             color: #333;
         }
         
-        body.light-theme .chat-placeholder h2 {
-            color: #666;
-        }
-        
-        body.light-theme .chat-placeholder p {
-            color: #888;
-        }
-        
-        body.light-theme .settings-box,
-        body.light-theme .user-profile-box {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-        }
-        
-        body.light-theme .settings-header h2,
-        body.light-theme .user-profile-header h2 {
-            color: #0088cc;
-        }
-        
-        body.light-theme .settings-input,
-        body.light-theme .settings-textarea {
-            background: #f5f5f5;
-            border: 1px solid #e0e0e0;
-            color: #333;
-        }
-        
-        body.light-theme .settings-label {
-            color: #666;
-        }
-        
-        body.light-theme .avatar-option {
-            background: #f5f5f5;
-        }
-        
-        body.light-theme .avatar-option.selected {
-            border-color: #0088cc;
-            background: #e8f0fe;
-        }
-        
-        body.light-theme .notification {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-left: 4px solid #0088cc;
-            color: #333;
-        }
-        
-        body.light-theme .auth-modal {
-            background: #f0f2f5;
-        }
-        
-        body.light-theme .auth-box {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-        }
-        
-        body.light-theme .anonymity-badge {
-            background: #f5f5f5;
-            border: 1px solid #e0e0e0;
-        }
-        
-        body.light-theme .anonymity-text {
-            color: #666;
-        }
-        
-        body.light-theme .auth-tabs {
-            background: #f0f0f0;
-        }
-        
-        body.light-theme .auth-tab {
-            color: #666;
-        }
-        
-        body.light-theme .auth-input {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            color: #333;
-        }
-        
         /* ========== ПЛАВНЫЕ АНИМАЦИИ ========== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -265,22 +162,6 @@
         @keyframes scaleIn {
             from { transform: scale(0.95); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0,136,204,0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0,136,204,0); }
-            100% { box-shadow: 0 0 0 0 rgba(0,136,204,0); }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
         
         /* ========== ОКНО АВТОРИЗАЦИИ ========== */
@@ -309,11 +190,6 @@
             animation: fadeIn 0.4s ease;
         }
         
-        .auth-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
         .auth-title h2 {
             font-size: 32px;
             color: #0088cc;
@@ -322,10 +198,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-        }
-        
-        .auth-title h2 i {
-            font-size: 36px;
+            margin-bottom: 25px;
         }
         
         .anonymity-badge {
@@ -334,7 +207,6 @@
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 25px;
-            animation: scaleIn 0.5s ease;
         }
         
         .anonymity-title {
@@ -346,13 +218,6 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 12px;
-        }
-        
-        .anonymity-text {
-            color: #aaa;
-            font-size: 14px;
-            text-align: center;
-            line-height: 1.6;
         }
         
         .auth-tabs {
@@ -372,7 +237,6 @@
             font-size: 16px;
             font-weight: 600;
             border-radius: 10px;
-            transition: all 0.3s ease;
         }
         
         .auth-tab.active {
@@ -382,7 +246,6 @@
         
         .auth-form {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
         
         .auth-form.hidden {
@@ -398,13 +261,11 @@
             color: #fff;
             font-size: 16px;
             margin-bottom: 12px;
-            transition: all 0.3s ease;
         }
         
         .auth-input:focus {
             border-color: #0088cc;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
         }
         
         .auth-button {
@@ -422,82 +283,9 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s ease;
         }
         
-        .auth-button:hover {
-            background: #0077b3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-        }
-        
-        /* ========== КНОПКА ОТКРЫТИЯ ЧАТОВ ========== */
-        .open-chats-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 56px;
-            height: 56px;
-            background: #0088cc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-            z-index: 50;
-            border: none;
-            transition: all 0.3s ease;
-            animation: scaleIn 0.5s ease, pulse 2s infinite;
-        }
-        
-        .open-chats-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0,136,204,0.4);
-        }
-        
-        @media (min-width: 768px) {
-            .open-chats-btn {
-                display: none;
-            }
-        }
-        
-        /* ========== КНОПКА ВОЗВРАТА К ЧАТАМ ========== */
-        .return-to-chats-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 56px;
-            height: 56px;
-            background: #0088cc;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-            z-index: 50;
-            border: none;
-            transition: all 0.3s ease;
-            animation: slideUp 0.3s ease, pulse 2s infinite;
-        }
-        
-        .return-to-chats-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0,136,204,0.4);
-        }
-        
-        @media (min-width: 768px) {
-            .return-to-chats-btn {
-                display: none !important;
-            }
-        }
-        
-        /* ========== САЙДБАР ========== */
+        /* ========== САЙДБАР - БЕЗ КРЕСТИКА ========== */
         .sidebar {
             width: 100%;
             max-width: 380px;
@@ -509,9 +297,9 @@
             top: 0;
             left: 0;
             bottom: 0;
-            z-index: 100;
+            z-index: 200;
             transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease;
         }
         
         .sidebar.visible {
@@ -523,6 +311,7 @@
                 position: relative;
                 transform: translateX(0);
                 display: flex !important;
+                z-index: 100;
             }
         }
         
@@ -547,10 +336,6 @@
             font-weight: 700;
         }
         
-        .logo i {
-            font-size: 28px;
-        }
-        
         .header-buttons {
             display: flex;
             gap: 8px;
@@ -568,38 +353,10 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
         }
         
         .settings-btn:hover {
             background: #0088cc;
-        }
-        
-        .close-sidebar-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: #333;
-            border: 1px solid #444;
-            color: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        .close-sidebar-btn:hover {
-            background: #ff4444;
-        }
-        
-        @media (min-width: 768px) {
-            .close-sidebar-btn {
-                display: none;
-            }
         }
         
         /* ========== КАРТОЧКА ПОЛЬЗОВАТЕЛЯ ========== */
@@ -610,11 +367,6 @@
             display: flex;
             align-items: center;
             margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .user-card:hover {
-            background: #222;
         }
         
         .user-info {
@@ -634,12 +386,6 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .user-details {
-            min-width: 0;
-            flex: 1;
         }
         
         .user-details h4 {
@@ -668,10 +414,9 @@
             border-radius: 100px;
             font-size: 10px;
             color: #0088cc;
-            white-space: nowrap;
         }
         
-        /* ========== ПОИСК - УПРОЩЕННЫЙ ========== */
+        /* ========== ПОИСК ========== */
         .search-section {
             margin-top: 8px;
             background: #1a1a1a;
@@ -701,17 +446,11 @@
             border-radius: 16px;
             color: #fff;
             font-size: 16px;
-            transition: all 0.3s ease;
         }
         
         .search-box input:focus {
             border-color: #0088cc;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
-        }
-        
-        .search-box input::placeholder {
-            color: #777;
         }
         
         .search-box i {
@@ -720,11 +459,6 @@
             top: 14px;
             color: #777;
             font-size: 18px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-box input:focus + i {
-            color: #0088cc;
         }
         
         .search-results {
@@ -734,7 +468,6 @@
             border-radius: 12px;
             background: #222;
             display: none;
-            animation: scaleIn 0.3s ease;
         }
         
         .search-results.visible {
@@ -747,12 +480,10 @@
             padding: 12px;
             cursor: pointer;
             border-bottom: 1px solid #333;
-            transition: all 0.3s ease;
         }
         
         .search-result-item:hover {
             background: #2a2a2a;
-            transform: translateX(5px);
         }
         
         /* ========== СПИСОК ЧАТОВ ========== */
@@ -768,9 +499,6 @@
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         
         .chat-item {
@@ -779,26 +507,17 @@
             padding: 12px 20px;
             cursor: pointer;
             border-bottom: 1px solid #222;
-            transition: all 0.3s ease;
-            animation: slideIn 0.3s ease;
-            animation-fill-mode: both;
+            transition: all 0.2s ease;
         }
         
         .chat-item:hover {
             background: #1a1a1a;
-            transform: translateX(5px);
         }
         
         .chat-item.active {
             background: #1a1a1a;
             border-left: 4px solid #0088cc;
         }
-        
-        .chat-item:nth-child(1) { animation-delay: 0.05s; }
-        .chat-item:nth-child(2) { animation-delay: 0.1s; }
-        .chat-item:nth-child(3) { animation-delay: 0.15s; }
-        .chat-item:nth-child(4) { animation-delay: 0.2s; }
-        .chat-item:nth-child(5) { animation-delay: 0.25s; }
         
         .chat-avatar {
             width: 52px;
@@ -822,7 +541,6 @@
             border-radius: 50%;
             background: #00ff00;
             border: 2px solid #111;
-            animation: pulse 2s infinite;
         }
         
         /* ========== ОБЛАСТЬ ЧАТА ========== */
@@ -833,6 +551,13 @@
             background: #000;
             position: relative;
             width: 100%;
+            z-index: 150;
+        }
+        
+        @media (min-width: 768px) {
+            .chat-container {
+                z-index: 50;
+            }
         }
         
         .chat-header {
@@ -842,30 +567,30 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            animation: slideIn 0.3s ease;
         }
         
-        .mobile-back-btn {
+        /* ===== ЕДИНСТВЕННАЯ СТРЕЛКА - СВЕРХУ СЛЕВА ===== */
+        .chat-back-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: #222;
-            border: 1px solid #333;
+            background: #0088cc;
+            border: none;
             border-radius: 12px;
-            color: #fff;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
         }
         
-        .mobile-back-btn:hover {
-            background: #333;
-            transform: scale(1.05);
+        .chat-back-btn:hover {
+            transform: scale(1.1);
         }
         
         @media (min-width: 768px) {
-            .mobile-back-btn {
+            .chat-back-btn {
                 display: none;
             }
         }
@@ -879,7 +604,6 @@
             cursor: pointer;
             padding: 8px;
             border-radius: 12px;
-            transition: all 0.3s ease;
         }
         
         .chat-user:hover {
@@ -896,11 +620,6 @@
             font-size: 22px;
             position: relative;
             flex-shrink: 0;
-        }
-        
-        .chat-user-info {
-            min-width: 0;
-            flex: 1;
         }
         
         .chat-user-info h3 {
@@ -933,7 +652,7 @@
             padding: 14px 18px;
             border-radius: 22px;
             word-wrap: break-word;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease;
         }
         
         @media (min-width: 768px) {
@@ -956,18 +675,6 @@
             color: #fff;
         }
         
-        .message-text {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 6px;
-        }
-        
-        .message-time {
-            font-size: 11px;
-            color: rgba(255,255,255,0.7);
-            text-align: right;
-        }
-        
         /* ========== ПАНЕЛЬ ВВОДА ========== */
         .input-area {
             padding: 16px;
@@ -977,7 +684,6 @@
             gap: 12px;
             align-items: center;
             padding-bottom: calc(16px + env(safe-area-inset-bottom));
-            animation: slideIn 0.4s ease;
         }
         
         .sticker-btn {
@@ -993,13 +699,6 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .sticker-btn:hover {
-            background: #333;
-            color: #0088cc;
-            transform: scale(1.05);
         }
         
         .message-input {
@@ -1011,12 +710,10 @@
             color: #fff;
             font-size: 16px;
             outline: none;
-            transition: all 0.3s ease;
         }
         
         .message-input:focus {
             border-color: #0088cc;
-            box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
         }
         
         .send-button {
@@ -1032,12 +729,6 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .send-button:hover {
-            background: #0077b3;
-            transform: scale(1.1);
         }
         
         .chat-placeholder {
@@ -1048,7 +739,6 @@
             justify-content: center;
             padding: 30px 20px;
             text-align: center;
-            animation: fadeIn 0.6s ease;
             height: 100%;
             width: 100%;
         }
@@ -1057,21 +747,6 @@
             font-size: 80px;
             color: #0088cc;
             margin-bottom: 24px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .chat-placeholder h2 {
-            color: #555;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: center;
-        }
-        
-        .chat-placeholder p {
-            color: #444;
-            margin-top: 8px;
         }
         
         #chatActive {
@@ -1081,7 +756,44 @@
             width: 100%;
         }
         
-        /* ========== МОДАЛКА ПРОФИЛЯ ========== */
+        /* ========== КНОПКА ВОЗВРАТА ТОЛЬКО НА ТЕЛЕФОНЕ ========== */
+        .nav-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 300;
+        }
+        
+        .nav-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #0088cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-btn.hidden {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-buttons {
+                display: none;
+            }
+        }
+        
+        /* ========== МОДАЛКИ ========== */
+        .settings-modal,
         .user-profile-modal {
             position: fixed;
             top: 0;
@@ -1092,22 +804,25 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
+            z-index: 1000;
             padding: 16px;
             backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
         }
         
+        .settings-box,
         .user-profile-box {
             background: #111;
             padding: 24px;
             border-radius: 32px;
             border: 1px solid #333;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
             animation: scaleIn 0.3s ease;
         }
         
+        .settings-header,
         .user-profile-header {
             display: flex;
             justify-content: space-between;
@@ -1115,6 +830,7 @@
             margin-bottom: 24px;
         }
         
+        .settings-header h2,
         .user-profile-header h2 {
             color: #0088cc;
             font-size: 24px;
@@ -1123,6 +839,7 @@
             gap: 10px;
         }
         
+        .close-btn,
         .user-profile-close {
             width: 44px;
             height: 44px;
@@ -1135,240 +852,11 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            transition: all 0.3s ease;
         }
         
+        .close-btn:hover,
         .user-profile-close:hover {
             background: #ff4444;
-            transform: rotate(90deg);
-        }
-        
-        .user-profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 56px;
-            border: 4px solid #0088cc;
-            animation: scaleIn 0.5s ease;
-        }
-        
-        .user-profile-name {
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        
-        .user-profile-name h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: #fff;
-        }
-        
-        .user-profile-username {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(0,136,204,0.15);
-            border: 1px solid #0088cc;
-            border-radius: 100px;
-            color: #0088cc;
-            font-size: 15px;
-            margin-bottom: 16px;
-        }
-        
-        .user-profile-bio {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #aaa;
-            line-height: 1.6;
-        }
-        
-        .user-profile-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            padding: 16px;
-            background: #1a1a1a;
-            border-radius: 16px;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0088cc;
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #777;
-        }
-        
-        .user-profile-status {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            border-radius: 12px;
-            background: #1a1a1a;
-            color: #aaa;
-        }
-        
-        .status-online {
-            color: #00ff00;
-            animation: pulse 2s infinite;
-        }
-        
-        .user-profile-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-        
-        .profile-action-btn {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .profile-action-btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        .message-btn {
-            background: #0088cc;
-            color: white;
-        }
-        
-        .block-btn {
-            background: #333;
-            color: #fff;
-            border: 1px solid #444;
-        }
-        
-        .block-btn:hover {
-            background: #ff4444;
-        }
-        
-        /* ========== МОДАЛКА НАСТРОЕК ========== */
-        .settings-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 16px;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .settings-box {
-            background: #111;
-            padding: 24px;
-            border-radius: 32px;
-            border: 1px solid #333;
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: scaleIn 0.3s ease;
-        }
-        
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .settings-header h2 {
-            color: #0088cc;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .close-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: #333;
-            border: 1px solid #444;
-            color: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .close-btn:hover {
-            background: #ff4444;
-            transform: rotate(90deg);
-        }
-        
-        .settings-group {
-            margin-bottom: 24px;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .settings-label {
-            display: block;
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .settings-input,
-        .settings-textarea {
-            width: 100%;
-            padding: 14px;
-            background: #222;
-            border: 1px solid #333;
-            border-radius: 12px;
-            color: #fff;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .settings-input:focus,
-        .settings-textarea:focus {
-            border-color: #0088cc;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0,136,204,0.2);
         }
         
         .theme-switcher {
@@ -1388,22 +876,11 @@
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             color: #aaa;
-        }
-        
-        .theme-option i {
-            font-size: 18px;
-        }
-        
-        .theme-option:hover {
-            background: #333;
-            transform: translateY(-2px);
         }
         
         .theme-option.active {
             background: #0088cc;
-            border-color: #0088cc;
             color: white;
         }
         
@@ -1425,19 +902,11 @@
             justify-content: center;
             font-size: 28px;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .avatar-option:hover {
-            border-color: #0088cc;
-            background: #2a2a2a;
-            transform: scale(1.05);
         }
         
         .avatar-option.selected {
             border-color: #0088cc;
             background: #1a1a1a;
-            box-shadow: 0 0 0 2px rgba(0,136,204,0.3);
         }
         
         .color-selector {
@@ -1453,50 +922,18 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .color-option:hover {
-            transform: scale(1.1);
         }
         
         .color-option.selected {
             border-color: #fff;
             transform: scale(1.1);
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
         }
         
-        .settings-save-btn {
-            width: 100%;
-            padding: 16px;
-            background: #0088cc;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .settings-save-btn:hover {
-            background: #0077b3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,136,204,0.3);
-        }
-        
+        .settings-save-btn,
         .logout-settings-btn {
             width: 100%;
             padding: 16px;
-            background: #ff4444;
-            border: none;
             border-radius: 12px;
-            color: white;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
@@ -1505,20 +942,22 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            border: none;
         }
         
-        .logout-settings-btn:hover {
-            background: #ff0000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,68,68,0.3);
+        .settings-save-btn {
+            background: #0088cc;
+            color: white;
         }
         
-        /* ========== УВЕДОМЛЕНИЯ ========== */
+        .logout-settings-btn {
+            background: #ff4444;
+            color: white;
+        }
+        
         .notification {
             position: fixed;
             bottom: 20px;
-            left: 20px;
             right: 20px;
             background: #111;
             border: 1px solid #333;
@@ -1528,16 +967,8 @@
             display: none;
             z-index: 10001;
             max-width: 400px;
-            margin: 0 auto;
             animation: slideIn 0.3s ease;
             color: #fff;
-        }
-        
-        @media (min-width: 768px) {
-            .notification {
-                left: auto;
-                right: 20px;
-            }
         }
         
         ::-webkit-scrollbar {
@@ -1551,10 +982,6 @@
         ::-webkit-scrollbar-thumb {
             background: #333;
             border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #444;
         }
     </style>
 </head>
@@ -1574,10 +1001,9 @@
                     <i class="fas fa-shield-alt"></i>
                     <span>АНОНИМНАЯ ПЕРЕПИСКА</span>
                 </div>
-                <div class="anonymity-text">
+                <div style="color: #aaa; font-size: 14px; text-align: center;">
                     🔒 Номер телефона не нужен<br>
-                    🕵️ Только никнейм и пароль<br>
-                    ✈️ Полная анонимность
+                    🕵️ Только никнейм и пароль
                 </div>
             </div>
             
@@ -1614,16 +1040,6 @@
         </div>
     </div>
     
-    <!-- ========== КНОПКА ОТКРЫТИЯ ЧАТОВ ========== -->
-    <button class="open-chats-btn" id="openChatsBtn">
-        <i class="fas fa-comments"></i>
-    </button>
-    
-    <!-- ========== КНОПКА ВОЗВРАТА К ЧАТАМ ========== -->
-    <button class="return-to-chats-btn" id="returnToChatsBtn">
-        <i class="fas fa-arrow-left"></i>
-    </button>
-    
     <!-- ========== МОДАЛКА ПРОФИЛЯ ========== -->
     <div class="user-profile-modal" id="userProfileModal">
         <div class="user-profile-box">
@@ -1636,10 +1052,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
-            <div id="profileContent">
-                <!-- Заполняется динамически -->
-            </div>
+            <div id="profileContent"></div>
         </div>
     </div>
     
@@ -1656,19 +1069,16 @@
                 </button>
             </div>
             
-            <!-- АВАТАР -->
             <div class="settings-group">
                 <label class="settings-label">Аватар</label>
                 <div class="avatar-selector" id="avatarSelector"></div>
             </div>
             
-            <!-- ЦВЕТ ПРОФИЛЯ -->
             <div class="settings-group">
                 <label class="settings-label">Цвет профиля</label>
                 <div class="color-selector" id="colorSelector"></div>
             </div>
             
-            <!-- ТЕМА -->
             <div class="settings-group">
                 <label class="settings-label">Тема</label>
                 <div class="theme-switcher">
@@ -1683,7 +1093,6 @@
                 </div>
             </div>
             
-            <!-- ИНФОРМАЦИЯ -->
             <div class="settings-group">
                 <label class="settings-label">Имя</label>
                 <input type="text" class="settings-input" id="settingsName">
@@ -1707,7 +1116,6 @@
                 Сохранить
             </button>
             
-            <!-- ВЫХОД -->
             <button class="logout-settings-btn" id="logoutSettingsBtn">
                 <i class="fas fa-sign-out-alt"></i>
                 Выйти из аккаунта
@@ -1717,7 +1125,7 @@
     
     <!-- ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== -->
     <div class="app" id="app">
-        <!-- САЙДБАР -->
+        <!-- САЙДБАР - БЕЗ КРЕСТИКА -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo-row">
@@ -1726,19 +1134,14 @@
                         <span>SignalWire</span>
                     </div>
                     <div class="header-buttons">
-                        <button class="settings-btn" id="openSettingsBtnHeader" title="Настройки">
+                        <button class="settings-btn" id="openSettingsBtnHeader">
                             <i class="fas fa-cog"></i>
-                        </button>
-                        <button class="close-sidebar-btn" id="closeSidebarBtn">
-                            <i class="fas fa-times"></i>
                         </button>
                     </div>
                 </div>
                 
-                <!-- КАРТОЧКА ПОЛЬЗОВАТЕЛЯ -->
                 <div class="user-card" id="userCard"></div>
                 
-                <!-- ПОИСК - УПРОЩЕННЫЙ -->
                 <div class="search-section">
                     <div class="search-title">
                         <i class="fas fa-search"></i>
@@ -1752,7 +1155,6 @@
                 </div>
             </div>
             
-            <!-- СПИСОК ЧАТОВ -->
             <div class="chats-wrapper">
                 <div class="section-title">
                     <i class="fas fa-comments"></i>
@@ -1762,32 +1164,30 @@
             </div>
         </div>
         
-        <!-- ОБЛАСТЬ ЧАТА -->
+        <!-- ЧАТ -->
         <div class="chat-container" id="chatContainer">
             <div class="chat-placeholder" id="chatPlaceholder">
                 <i class="fas fa-paper-plane"></i>
-                <h2>
+                <h2 style="color: #555;">
                     <i class="fas fa-user-secret"></i>
                     Анонимный чат
                 </h2>
-                <p>🔒 Найдите собеседника в поиске</p>
+                <p style="color: #444;">🔒 Найдите собеседника в поиске</p>
             </div>
             
             <div style="display: none; flex-direction: column; height: 100%; width: 100%;" id="chatActive">
-                <!-- ШАПКА ЧАТА -->
                 <div class="chat-header">
-                    <button class="mobile-back-btn" id="backBtn">
+                    <!-- ЕДИНСТВЕННАЯ СТРЕЛКА - СВЕРХУ СЛЕВА -->
+                    <button class="chat-back-btn" id="chatBackBtn">
                         <i class="fas fa-arrow-left"></i>
                     </button>
                     <div class="chat-user" id="currentChatUser"></div>
                 </div>
                 
-                <!-- СООБЩЕНИЯ -->
                 <div class="messages" id="messagesContainer"></div>
                 
-                <!-- ПАНЕЛЬ ВВОДА -->
                 <div class="input-area">
-                    <button class="sticker-btn" id="stickerBtn" title="Скоро будут стикеры!">
+                    <button class="sticker-btn" id="stickerBtn">
                         <i class="far fa-smile"></i>
                     </button>
                     <input type="text" class="message-input" id="messageInput" placeholder="Сообщение...">
@@ -1799,7 +1199,6 @@
         </div>
     </div>
     
-    <!-- УВЕДОМЛЕНИЯ -->
     <div class="notification" id="notification">
         <div id="notificationText"></div>
     </div>
@@ -1820,7 +1219,6 @@
             appId: "1:897606109522:web:42ba031b9411e08b41928b"
         };
 
-        // Инициализация Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         
@@ -1832,23 +1230,19 @@
         let userChats = new Set();
         let usernameCheckTimeout;
         let searchTimeout;
-        
-        // Слушатели сообщений
         let messagesListener = null;
         let currentChatId = null;
         
-        // ========== АВАТАРЫ ==========
         const avatars = [
             '👨', '👩', '🧑', '👨‍🦰', '👩‍🦰', '👨‍🦱', '👩‍🦱', 
             '👨‍🦲', '👩‍🦲', '👨‍🦳', '👩‍🦳', '🧔', '🧑‍🦰', 
-            '👶', '🧒', '👧', '👦', '👴', '👵', '🧑‍🦱'
+            '👶', '🧒', '👧', '👦', '👴', '👵'
         ];
         
         const colors = [
             '#0088cc', '#2b5278', '#3a506b', '#5d5179', 
             '#4a6fa5', '#588157', '#9c27b0', '#e91e63',
-            '#ff9800', '#4caf50', '#2196f3', '#f44336',
-            '#795548', '#607d8b', '#8bc34a', '#ff5722'
+            '#ff9800', '#4caf50', '#2196f3', '#f44336'
         ];
         
         // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
@@ -1858,29 +1252,20 @@
                 document.getElementById('darkThemeBtn').classList.remove('active');
                 document.getElementById('lightThemeBtn').classList.add('active');
                 document.getElementById('themeColor').setAttribute('content', '#f0f2f5');
-                if (currentUser) {
-                    currentUser.theme = 'light';
-                }
+                if (currentUser) currentUser.theme = 'light';
             } else {
                 document.body.classList.remove('light-theme');
                 document.getElementById('darkThemeBtn').classList.add('active');
                 document.getElementById('lightThemeBtn').classList.remove('active');
                 document.getElementById('themeColor').setAttribute('content', '#000000');
-                if (currentUser) {
-                    currentUser.theme = 'dark';
-                }
+                if (currentUser) currentUser.theme = 'dark';
             }
         }
         
-        document.getElementById('darkThemeBtn').addEventListener('click', function() {
-            setTheme('dark');
-        });
+        document.getElementById('darkThemeBtn').addEventListener('click', () => setTheme('dark'));
+        document.getElementById('lightThemeBtn').addEventListener('click', () => setTheme('light'));
         
-        document.getElementById('lightThemeBtn').addEventListener('click', function() {
-            setTheme('light');
-        });
-        
-        // ========== ПРИ ЗАГРУЗКЕ ==========
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
         window.addEventListener('load', function() {
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('registerForm').classList.add('hidden');
@@ -1900,11 +1285,8 @@
                                 document.getElementById('sidebar').classList.add('visible');
                                 document.getElementById('chatContainer').style.display = 'flex';
                                 
-                                if (currentUser.theme === 'light') {
-                                    setTheme('light');
-                                } else {
-                                    setTheme('dark');
-                                }
+                                if (currentUser.theme === 'light') setTheme('light');
+                                else setTheme('dark');
                                 
                                 updateUserCard();
                                 loadUsers();
@@ -1969,7 +1351,7 @@
                             checkDiv.style.color = '#00ff00';
                         }
                     })
-                    .catch(error => {
+                    .catch(() => {
                         checkDiv.innerHTML = '❌ Ошибка проверки';
                         checkDiv.style.color = '#ff4444';
                     });
@@ -2050,8 +1432,7 @@
                     
                     showNotification('✈️ Добро пожаловать, ' + name + '!');
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch(() => {
                     showNotification('❌ Ошибка регистрации');
                 });
         }
@@ -2101,11 +1482,8 @@
                     document.getElementById('sidebar').classList.add('visible');
                     document.getElementById('chatContainer').style.display = 'flex';
                     
-                    if (currentUser.theme === 'light') {
-                        setTheme('light');
-                    } else {
-                        setTheme('dark');
-                    }
+                    if (currentUser.theme === 'light') setTheme('light');
+                    else setTheme('dark');
                     
                     updateUserCard();
                     loadUsers();
@@ -2113,8 +1491,7 @@
                     
                     showNotification('✈️ С возвращением, ' + currentUser.name + '!');
                 })
-                .catch(error => {
-                    console.error(error);
+                .catch(() => {
                     showNotification('❌ Ошибка входа');
                 });
         }
@@ -2142,7 +1519,7 @@
             `;
         }
         
-        // ========== ОТКРЫТЬ НАСТРОЙКИ ==========
+        // ========== НАСТРОЙКИ ==========
         function openSettings() {
             document.getElementById('settingsName').value = currentUser.name;
             document.getElementById('settingsUsername').value = currentUser.username;
@@ -2178,8 +1555,7 @@
         }
         
         document.getElementById('openSettingsBtnHeader').addEventListener('click', openSettings);
-        
-        document.getElementById('closeSettingsBtn').addEventListener('click', function() {
+        document.getElementById('closeSettingsBtn').addEventListener('click', () => {
             document.getElementById('settingsModal').style.display = 'none';
         });
         
@@ -2254,81 +1630,10 @@
             }
         });
         
-        // ========== ОТКРЫТЬ ПРОФИЛЬ ==========
-        function openUserProfile(user) {
-            const isOnline = onlineUsers[user.id] === true;
-            const lastSeen = user.lastSeen ? new Date(user.lastSeen).toLocaleString('ru-RU', {
-                hour: '2-digit',
-                minute: '2-digit'
-            }) : 'давно';
-            
-            database.ref('chats/' + [currentUser.id, user.id].sort().join('_')).once('value', snapshot => {
-                const messages = snapshot.val() || {};
-                const messagesCount = Object.keys(messages).length;
-                
-                const profileContent = document.getElementById('profileContent');
-                profileContent.innerHTML = `
-                    <div class="user-profile-avatar" style="background: ${user.color}; border-color: ${user.color};">
-                        ${user.avatar || '👤'}
-                    </div>
-                    
-                    <div class="user-profile-name">
-                        <h3>
-                            ${user.name}
-                            <span style="font-size: 16px; color: ${isOnline ? '#00ff00' : '#777'};">
-                                <i class="fas fa-circle"></i>
-                            </span>
-                        </h3>
-                        <span class="user-profile-username">@${user.username}</span>
-                    </div>
-                    
-                    <div class="user-profile-bio">
-                        <i class="fas fa-quote-left" style="color: #0088cc; margin-right: 8px;"></i>
-                        ${user.bio || 'Анонимный пользователь'}
-                        <i class="fas fa-quote-right" style="color: #0088cc; margin-left: 8px;"></i>
-                    </div>
-                    
-                    <div class="user-profile-stats">
-                        <div class="stat-item">
-                            <div class="stat-value">${messagesCount}</div>
-                            <div class="stat-label">сообщений</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">${user.registeredAt ? new Date(user.registeredAt).toLocaleDateString('ru-RU', {day: 'numeric', month: 'numeric'}) : '—'}</div>
-                            <div class="stat-label">регистрация</div>
-                        </div>
-                    </div>
-                    
-                    <div class="user-profile-status">
-                        <i class="fas ${isOnline ? 'fa-circle status-online' : 'fa-clock'}"></i>
-                        ${isOnline ? 'В сети' : 'Был(а): ' + lastSeen}
-                    </div>
-                    
-                    <div class="user-profile-actions">
-                        <button class="profile-action-btn message-btn" onclick="document.getElementById('closeProfileBtn').click();">
-                            <i class="fas fa-paper-plane"></i>
-                            Написать
-                        </button>
-                        <button class="profile-action-btn block-btn">
-                            <i class="fas fa-ban"></i>
-                            Заблокировать
-                        </button>
-                    </div>
-                `;
-                
-                document.getElementById('userProfileModal').style.display = 'flex';
-            });
-        }
-        
-        document.getElementById('closeProfileBtn').addEventListener('click', function() {
-            document.getElementById('userProfileModal').style.display = 'none';
-        });
-        
         // ========== ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ==========
         function loadUsers() {
             database.ref('users').on('value', snapshot => {
                 allUsers = snapshot.val() || {};
-                
                 database.ref('online').on('value', onlineSnapshot => {
                     onlineUsers = onlineSnapshot.val() || {};
                     loadUserChats();
@@ -2341,13 +1646,9 @@
             database.ref('userChats/' + currentUser.id).once('value', snapshot => {
                 const chats = snapshot.val() || {};
                 userChats.clear();
-                
                 for (const userId in chats) {
-                    if (chats[userId] === true) {
-                        userChats.add(userId);
-                    }
+                    if (chats[userId] === true) userChats.add(userId);
                 }
-                
                 renderChatsList();
             });
             
@@ -2368,7 +1669,7 @@
                 chatsList.innerHTML = `
                     <div style="padding: 40px 20px; text-align: center; color: #777;">
                         <i class="fas fa-paper-plane" style="font-size: 48px; margin-bottom: 16px; color: #333;"></i>
-                        <h3 style="margin-bottom: 8px;">Нет чатов</h3>
+                        <h3>Нет чатов</h3>
                         <p style="font-size: 14px;">Найдите собеседника в поиске</p>
                     </div>
                 `;
@@ -2382,15 +1683,10 @@
                 }
             });
             
-            chatUsers.sort((a, b) => {
-                const aOnline = onlineUsers[a.id] ? 1 : 0;
-                const bOnline = onlineUsers[b.id] ? 1 : 0;
-                return bOnline - aOnline;
-            });
+            chatUsers.sort((a, b) => (onlineUsers[b.id] ? 1 : 0) - (onlineUsers[a.id] ? 1 : 0));
             
             chatUsers.forEach(user => {
                 const isOnline = onlineUsers[user.id] === true;
-                
                 const chatItem = document.createElement('div');
                 chatItem.className = 'chat-item';
                 chatItem.dataset.userId = user.id;
@@ -2404,9 +1700,9 @@
                         ${user.avatar || '👤'}
                         ${isOnline ? '<div class="online-badge"></div>' : ''}
                     </div>
-                    <div style="flex: 1; min-width: 0;">
+                    <div style="flex: 1;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                            <span style="font-weight: 600; color: ${document.body.classList.contains('light-theme') ? '#333' : '#fff'};">${user.name}</span>
+                            <span style="font-weight: 600;">${user.name}</span>
                             <span style="font-size: 12px; color: #0088cc;">@${user.username}</span>
                         </div>
                         <div style="font-size: 13px; color: #aaa;">${user.bio || 'Анонимный пользователь'}</div>
@@ -2422,7 +1718,6 @@
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
             const searchText = this.value.trim();
-            
             const resultsDiv = document.getElementById('searchResults');
             
             if (searchText.length < 1) {
@@ -2433,19 +1728,12 @@
             
             searchTimeout = setTimeout(() => {
                 const isExactUsername = searchText.startsWith('@');
-                let searchTerm = searchText;
-                
-                if (isExactUsername) {
-                    searchTerm = searchText.substring(1).toLowerCase();
-                } else {
-                    searchTerm = searchText.toLowerCase();
-                }
+                let searchTerm = isExactUsername ? searchText.substring(1).toLowerCase() : searchText.toLowerCase();
                 
                 const results = [];
                 
                 for (const userId in allUsers) {
                     if (userId === currentUser.id) continue;
-                    
                     const user = allUsers[userId];
                     
                     if (isExactUsername) {
@@ -2460,57 +1748,51 @@
                     }
                 }
                 
-                displaySearchResults(results, isExactUsername);
+                resultsDiv.innerHTML = '';
+                
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = `
+                        <div style="padding: 20px; text-align: center; color: #777;">
+                            <i class="fas fa-user-secret" style="font-size: 24px; margin-bottom: 8px;"></i>
+                            <p>${isExactUsername ? 'Пользователь не найден' : 'Ничего не найдено'}</p>
+                        </div>
+                    `;
+                    resultsDiv.classList.add('visible');
+                    return;
+                }
+                
+                results.slice(0, 5).forEach(user => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: ${user.color || '#444'}; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-right: 12px;">
+                            ${user.avatar || '👤'}
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
+                                <span style="font-weight: 600;">${user.name}</span>
+                                <span style="font-size: 11px; color: #0088cc;">@${user.username}</span>
+                            </div>
+                            <div style="font-size: 12px; color: #aaa;">${user.bio || 'Анонимный пользователь'}</div>
+                        </div>
+                    `;
+                    
+                    resultItem.addEventListener('click', () => {
+                        startChat(user.id, user);
+                        resultsDiv.classList.remove('visible');
+                        document.getElementById('searchInput').value = '';
+                    });
+                    
+                    resultsDiv.appendChild(resultItem);
+                });
+                
+                resultsDiv.classList.add('visible');
             }, 300);
         });
         
-        function displaySearchResults(results, isExactUsername) {
-            const resultsDiv = document.getElementById('searchResults');
-            resultsDiv.innerHTML = '';
-            
-            if (results.length === 0) {
-                resultsDiv.innerHTML = `
-                    <div style="padding: 20px; text-align: center; color: #777;">
-                        <i class="fas fa-user-secret" style="font-size: 24px; margin-bottom: 8px;"></i>
-                        <p>${isExactUsername ? 'Пользователь не найден' : 'Ничего не найдено'}</p>
-                    </div>
-                `;
-                resultsDiv.classList.add('visible');
-                return;
-            }
-            
-            results.slice(0, 5).forEach(user => {
-                const resultItem = document.createElement('div');
-                resultItem.className = 'search-result-item';
-                
-                resultItem.innerHTML = `
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: ${user.color || '#444'}; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-right: 12px;">
-                        ${user.avatar || '👤'}
-                    </div>
-                    <div style="flex: 1;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
-                            <span style="font-weight: 600; color: ${document.body.classList.contains('light-theme') ? '#333' : '#fff'};">${user.name}</span>
-                            <span style="font-size: 11px; color: #0088cc;">@${user.username}</span>
-                        </div>
-                        <div style="font-size: 12px; color: #aaa;">${user.bio || 'Анонимный пользователь'}</div>
-                    </div>
-                `;
-                
-                resultItem.addEventListener('click', () => {
-                    startChat(user.id, user);
-                    resultsDiv.classList.remove('visible');
-                    document.getElementById('searchInput').value = '';
-                });
-                
-                resultsDiv.appendChild(resultItem);
-            });
-            
-            resultsDiv.classList.add('visible');
-        }
-        
         // ========== НАЧАТЬ ЧАТ ==========
         function startChat(userId, user) {
-            // Удаляем старый слушатель сообщений
+            // Удаляем старый слушатель
             if (messagesListener && currentChatId) {
                 database.ref('chats/' + currentChatId).off('value', messagesListener);
                 messagesListener = null;
@@ -2521,9 +1803,11 @@
             
             const isOnline = onlineUsers[userId] === true;
             
+            // Добавляем в список чатов
             userChats.add(userId);
             database.ref('userChats/' + currentUser.id + '/' + userId).set(true);
             
+            // Обновляем шапку чата
             document.getElementById('currentChatUser').innerHTML = `
                 <div class="chat-user-avatar" style="background: ${user.color || '#444'}">
                     ${user.avatar || '👤'}
@@ -2535,20 +1819,19 @@
                 </div>
             `;
             
-            // Добавляем обработчик клика на профиль
+            // Добавляем обработчик на профиль
             const chatUserElement = document.querySelector('.chat-user');
             if (chatUserElement) {
-                chatUserElement.onclick = function() {
-                    openUserProfile(currentChatUser);
-                };
+                chatUserElement.onclick = () => openUserProfile(currentChatUser);
             }
             
+            // Показываем чат, скрываем заглушку
             document.getElementById('chatPlaceholder').style.display = 'none';
             document.getElementById('chatActive').style.display = 'flex';
             
+            // На телефоне закрываем сайдбар
             if (window.innerWidth < 768) {
-                document.getElementById('returnToChatsBtn').style.display = 'flex';
-                document.getElementById('openChatsBtn').style.display = 'none';
+                document.getElementById('sidebar').classList.remove('visible');
             }
             
             renderChatsList();
@@ -2561,28 +1844,27 @@
             
             const messagesContainer = document.getElementById('messagesContainer');
             
-            // Сохраняем ссылку на слушатель
             messagesListener = database.ref('chats/' + currentChatId).limitToLast(50).on('value', snapshot => {
                 const messages = snapshot.val() || {};
                 messagesContainer.innerHTML = '';
                 
-                const sortedMessages = Object.values(messages).sort((a, b) => a.timestamp - b.timestamp);
-                
-                sortedMessages.forEach(msg => {
-                    const message = document.createElement('div');
-                    message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
-                    
-                    const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
-                        hour: '2-digit', minute: '2-digit'
+                Object.values(messages)
+                    .sort((a, b) => a.timestamp - b.timestamp)
+                    .forEach(msg => {
+                        const message = document.createElement('div');
+                        message.className = `message ${msg.senderId === currentUser.id ? 'sent' : 'received'}`;
+                        
+                        const time = new Date(msg.timestamp).toLocaleTimeString('ru-RU', {
+                            hour: '2-digit', minute: '2-digit'
+                        });
+                        
+                        message.innerHTML = `
+                            <div class="message-text">${msg.text}</div>
+                            <div class="message-time">${time}</div>
+                        `;
+                        
+                        messagesContainer.appendChild(message);
                     });
-                    
-                    message.innerHTML = `
-                        <div class="message-text">${msg.text}</div>
-                        <div class="message-time">${time}</div>
-                    `;
-                    
-                    messagesContainer.appendChild(message);
-                });
                 
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             });
@@ -2619,43 +1901,70 @@
             input.value = '';
         }
         
-        // ========== СТИКЕРЫ ==========
-        document.getElementById('stickerBtn').addEventListener('click', function() {
-            showNotification('🎨 Стикеры будут в следующем обновлении!');
+        // ========== ОТКРЫТЬ ПРОФИЛЬ ==========
+        function openUserProfile(user) {
+            const isOnline = onlineUsers[user.id] === true;
+            const lastSeen = user.lastSeen ? new Date(user.lastSeen).toLocaleTimeString('ru-RU', {
+                hour: '2-digit', minute: '2-digit'
+            }) : 'давно';
+            
+            database.ref('chats/' + [currentUser.id, user.id].sort().join('_')).once('value', snapshot => {
+                const messages = snapshot.val() || {};
+                const messagesCount = Object.keys(messages).length;
+                
+                document.getElementById('profileContent').innerHTML = `
+                    <div class="user-profile-avatar" style="background: ${user.color}; border-color: ${user.color};">
+                        ${user.avatar || '👤'}
+                    </div>
+                    <div class="user-profile-name">
+                        <h3>
+                            ${user.name}
+                            <span style="font-size: 16px; color: ${isOnline ? '#00ff00' : '#777'};">
+                                <i class="fas fa-circle"></i>
+                            </span>
+                        </h3>
+                        <span class="user-profile-username">@${user.username}</span>
+                    </div>
+                    <div class="user-profile-bio">
+                        ${user.bio || 'Анонимный пользователь'}
+                    </div>
+                    <div class="user-profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">${messagesCount}</div>
+                            <div class="stat-label">сообщений</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${user.registeredAt ? new Date(user.registeredAt).toLocaleDateString('ru-RU', {day: 'numeric', month: 'numeric'}) : '—'}</div>
+                            <div class="stat-label">регистрация</div>
+                        </div>
+                    </div>
+                    <div class="user-profile-status">
+                        <i class="fas ${isOnline ? 'fa-circle status-online' : 'fa-clock'}"></i>
+                        ${isOnline ? 'В сети' : 'Был(а): ' + lastSeen}
+                    </div>
+                    <div class="user-profile-actions">
+                        <button class="profile-action-btn message-btn" onclick="document.getElementById('closeProfileBtn').click();">
+                            <i class="fas fa-paper-plane"></i>
+                            Написать
+                        </button>
+                        <button class="profile-action-btn block-btn">
+                            <i class="fas fa-ban"></i>
+                            Заблокировать
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('userProfileModal').style.display = 'flex';
+            });
+        }
+        
+        document.getElementById('closeProfileBtn').addEventListener('click', () => {
+            document.getElementById('userProfileModal').style.display = 'none';
         });
         
-        // ========== МОБИЛЬНЫЕ КНОПКИ ==========
-        document.getElementById('closeSidebarBtn').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('visible');
-        });
-        
-        document.getElementById('backBtn').addEventListener('click', function() {
+        // ========== КНОПКА НАЗАД ==========
+        document.getElementById('chatBackBtn').addEventListener('click', () => {
             document.getElementById('sidebar').classList.add('visible');
-        });
-        
-        document.getElementById('openChatsBtn').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.add('visible');
-        });
-        
-        document.getElementById('returnToChatsBtn').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.add('visible');
-            document.getElementById('returnToChatsBtn').style.display = 'none';
-            document.getElementById('openChatsBtn').style.display = 'flex';
-        });
-        
-        window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768) {
-                document.getElementById('returnToChatsBtn').style.display = 'none';
-                document.getElementById('openChatsBtn').style.display = 'none';
-            } else {
-                if (currentChatUser) {
-                    document.getElementById('returnToChatsBtn').style.display = 'flex';
-                    document.getElementById('openChatsBtn').style.display = 'none';
-                } else {
-                    document.getElementById('openChatsBtn').style.display = 'flex';
-                    document.getElementById('returnToChatsBtn').style.display = 'none';
-                }
-            }
         });
         
         // ========== FIREBASE СЛУШАТЕЛИ ==========
@@ -2678,6 +1987,11 @@
             notification.style.display = 'block';
             setTimeout(() => notification.style.display = 'none', 3000);
         }
+        
+        // ========== СТИКЕРЫ ==========
+        document.getElementById('stickerBtn').addEventListener('click', () => {
+            showNotification('🎨 Стикеры будут в следующем обновлении!');
+        });
         
         // ========== ЗАКРЫТИЕ МОДАЛОК ==========
         window.addEventListener('click', function(e) {
@@ -2702,11 +2016,11 @@
         });
         
         // ========== ВХОД ПО ENTER ==========
-        document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+        document.getElementById('loginPassword').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') login();
         });
         
-        document.getElementById('regPasswordConfirm').addEventListener('keypress', function(e) {
+        document.getElementById('regPasswordConfirm').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') register();
         });
     </script>
